@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
       return res.status(200).json({
         error: {
           code: 401,
-          error_message: "User has been not authorized"
+          error_message: "Пользователь не авторизован"
         }
       })
     }
@@ -23,7 +23,7 @@ module.exports = function (req, res, next) {
     return res.status(200).json({
       error: {
         code: 401,
-        error_message: "User has been not authorized"
+        error_message: "Пользователь не авторизован"
       }
     })
   }
