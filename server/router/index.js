@@ -13,6 +13,7 @@ router.post("/project/add", authMiddleware, ProjectController.addProject);
 router.post("/projects/get", authMiddleware, ProjectController.getProjects);
 router.get("/project/get", authMiddleware, ProjectController.getProject);
 router.delete("/project/delete", authMiddleware, ProjectController.deleteProject);
+
 router.get("/", (req, res) => res.send({ status: "ok" }));
 
 module.exports = router;

@@ -54,6 +54,7 @@ class ProjectService {
   async getProject(project_id) {
     try {
       const [[project]] = await mysql.query(`SELECT * FROM projects WHERE id='${project_id}'`);
+
       return project;
     } catch (e) {
       throw new Error(e.message);
