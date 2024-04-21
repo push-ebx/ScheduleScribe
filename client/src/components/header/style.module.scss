@@ -1,0 +1,19 @@
+@import "@/components/app/vars.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  height: $header-height;
+  -webkit-box-shadow: 0px 9px 41px 0px rgba(0,0,0,0.24);
+  -moz-box-shadow: 0px 9px 41px 0px rgba(0,0,0,0.24);
+  box-shadow: 0px 9px 41px 0px rgba(0,0,0,0.24);
+  background: #fff;
+
+  .logo {
+    font-size: 30px;
+    font-weight: 700;
+    // color: $
+  }
+}

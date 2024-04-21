@@ -1,0 +1,40 @@
+.card {
+  .card_content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 5fr 3fr;
+  padding: 50px;
+  gap: 70px 30px;
+}
+
+.today_events {
+  grid-column: 1/3;
+}
+
+.calendar {
+  grid-column: 3/6;
+}
+
+.info {
+  grid-column: 6/7;
+}
+
+.notes {
+  grid-column: 1/3;
+}
+
+.important_events {
+  grid-column: 3/5;
+}
+
+.upcoming_events {
+  grid-column: 5/7;
+}
