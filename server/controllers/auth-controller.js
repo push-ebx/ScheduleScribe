@@ -9,20 +9,20 @@ const generateAccessToken = (id) => {
 class AuthController {
   async registration(req, res) {
     try {
-      const {username, password, email} = req.body;
-      const [users] = await mysql.query(`SELECT username FROM users WHERE username='${username}' OR email='${email}'`);
+      const {username, password} = req.body;
+      const [users] = await mysql.query(`SELECT username FROM users WHERE username='${username}'`);
 
       if (users.length) {
         return res.send({
           status: 'error',
           success: false,
-          message: 'Пользователь с таким именем или адресом электронной почты уже зарегистрирован!'
+          message: 'Пользователь с таким именем уже зарегистрирован!'
         })
       }
 
       const hash_password = bcrypt.hashSync(password, 7)
 
-      await mysql.query(`INSERT INTO users (username, email, hash_password) VALUES ('${username}', '${email}', '${hash_password}');`);
+      await mysql.query(`INSERT INTO users (username, hash_password) VALUES ('${username}', '${hash_password}');`);
       const [[{id}]] = await mysql.query(`SELECT LAST_INSERT_ID() as id;`);
       const token = generateAccessToken(id);
 
