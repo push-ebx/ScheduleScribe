@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 
 class ProjectService {
   async createProject(title, description, user_id) {
@@ -42,7 +42,7 @@ class ProjectService {
           INNER JOIN project_user ub ON u.id = ub.user_id
           WHERE ub.project_id = '${project.id}'
         `);
-        return { ...project, users };
+        return {...project, users};
       }));
 
       return userProjectsWithUsers;
