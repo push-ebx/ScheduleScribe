@@ -1,42 +1,37 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { App } from '@/components/app';
-import { Dashboard } from '@/components/dashboard'
-import {
-  createBrowserRouter, redirect,
-  RouterProvider
-} from "react-router-dom";
-import { ConfigProvider } from 'antd';
-import { Auth } from './components/auth';
-import {Calendars} from "@/components/calendars/index.jsx";
-import {Notifications} from "@/components/notifications/index.jsx";
-import {Notes} from "@/components/notes/index.jsx";
+import ReactDOM from 'react-dom/client';
+import "@/components/app/index.scss";
+import {Auth, Calendars, Dashboard, Notes, Notifications} from "@/components/pages";
+import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
+import {ConfigProvider} from 'antd';
+import {Provider} from "react-redux";
+import {store} from "@/lib/stotre.js";
+import {ProtectedRoute} from "@/components/layouts/protected-route.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
     loader: async () => redirect("/dashboard")
   },
   {
     path: "/auth",
-    element: <Auth />,
+    element: <Auth/>,
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <ProtectedRoute><Dashboard/></ProtectedRoute>,
   },
   {
     path: "/calendars",
-    element: <Calendars />,
+    element: <ProtectedRoute><Calendars/></ProtectedRoute>,
   },
   {
     path: "/notes",
-    element: <Notes />,
+    element: <Notes/>,
   },
   {
     path: "/notifications",
-    element: <Notifications />,
+    element: <Notifications/>,
   },
 ]);
 
@@ -50,6 +45,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       },
     }}
   >
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
   </ConfigProvider>
 );

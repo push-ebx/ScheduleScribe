@@ -1,30 +1,25 @@
-import {useEffect, useState} from 'react';
-import {Tabs, Form, Input, Button, message, Spin} from 'antd';
-// import {login, registration} from '@/api/auth.ts';
+import {useState} from 'react';
+import {Button, Form, Input, message, Tabs} from 'antd';
 import styles from "./style.module.scss";
+import {login, registration} from "@/api/auth.js";
 import {useNavigate} from 'react-router-dom';
-// import userStore from "@/store/user-store.ts";
-// import {observer} from "mobx-react-lite";
-
+import {useAuth} from "@/components/hooks/useAuth.js";
 const {TabPane} = Tabs;
-// export const Auth = observer(() => {
+
 export const Auth = (() => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+
+  const {user, isFetching: isFetchingUser} = useAuth();
+
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     // if (userStore.user && window.localStorage.getItem('token')) {
-//     if (window.localStorage.getItem('token')) {
-//       setTimeout(() => {
-//         navigate("/dashboard");
-//       }, 2000);
-//     }
-//   }, [userStore.user]);
+  if (user) {
+    navigate("/dashboard");
+  }
 
   const handleRegistration = async () => {
-    // const res = await registration(username, password, email);
+    const res = await registration(username, password);
 
     if (res.success) {
       message.success('Регистрация прошла успешно! Вы можете войти в аккаунт.');
@@ -34,20 +29,20 @@ export const Auth = (() => {
   };
 
   const handleLogin = async () => {
-    // const res = await login(username, password);
+    const res = await login(username, password);
 
-    // if (res.success) {
-    //   message.success('Вы успешно вошли в аккаунт. Сейчас вы будете перенаправлены на страницу с вашими проектами!');
-    //   console.log(res.data)
-    //   userStore.setUser({username: res.data.username, email: res.data.email, id: res.data.id});
-    // } else {
-    //   message.error(`${res.message}`);
-    // }
+    if (res.success) {
+      window.localStorage.setItem('token', res.data.token);
+      navigate("/dashboard");
+    } else {
+      message.error(`${res.message}`);
+    }
   };
 
   return (
     <>
-      {window.localStorage.getItem('token')&0 ?
+      {
+        isFetchingUser || user ?
         <div className="loader-container">
           <div className="loader"></div>
         </div> :
@@ -97,17 +92,6 @@ export const Auth = (() => {
                   >
                     <Input.Password value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </Form.Item>
-                  <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{
-                      required: true,
-                      type: 'email',
-                      message: 'Пожалуйста, введите корректный адрес электронной почты!'
-                    }]}
-                  >
-                    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                  </Form.Item>
                   <Form.Item>
                     <Button type="primary" htmlType="submit">Зарегистрироваться</Button>
                   </Form.Item>
@@ -115,7 +99,8 @@ export const Auth = (() => {
               </TabPane>
             </Tabs>
           </div>
-        </div>}
+        </div>
+      }
     </>
   );
 });
