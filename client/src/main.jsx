@@ -6,7 +6,8 @@ import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import {ConfigProvider} from 'antd';
 import {Provider} from "react-redux";
 import {store} from "@/lib/stotre.js";
-import {ProtectedRoute} from "@/components/layouts/protected-route.js";
+import {ProtectedRoute} from "@/components/layouts/protected-route.jsx";
+import {DashboardLayout} from "@/components/layouts/dashboardLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,19 +20,39 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <ProtectedRoute><Dashboard/></ProtectedRoute>,
+    element:
+      <ProtectedRoute>
+        <DashboardLayout>
+          <Dashboard/>
+        </DashboardLayout>
+      </ProtectedRoute>,
   },
   {
     path: "/calendars",
-    element: <ProtectedRoute><Calendars/></ProtectedRoute>,
+    element:
+      <ProtectedRoute>
+        <DashboardLayout>
+          <Calendars/>
+        </DashboardLayout>
+      </ProtectedRoute>,
   },
   {
     path: "/notes",
-    element: <Notes/>,
+    element:
+      <ProtectedRoute>
+        <DashboardLayout>
+          <Notes/>
+        </DashboardLayout>
+      </ProtectedRoute>,
   },
   {
     path: "/notifications",
-    element: <Notifications/>,
+    element:
+      <ProtectedRoute>
+        <DashboardLayout>
+          <Notifications/>
+        </DashboardLayout>
+      </ProtectedRoute>,
   },
 ]);
 

@@ -1,4 +1,4 @@
-@import "@/components/app/vars.scss";
+@import "@/components/app/vars";
 
 .header {
   display: flex;
@@ -16,4 +16,8 @@
     font-weight: 700;
     // color: $
   }
+}
+
+.user {
+  cursor: pointer;
 }

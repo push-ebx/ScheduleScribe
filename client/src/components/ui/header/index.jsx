@@ -14,13 +14,13 @@ export const Header = () => {
     {
       key: '1',
       label: (
-        <Button onClick={() => {
+        <a onClick={() => {
           window.localStorage.setItem('token', '');
           dispatch(clear())
           navigate('/auth');
         }}>
           Выйти
-        </Button>
+        </a>
       ),
     }
   ];
@@ -32,12 +32,10 @@ export const Header = () => {
       </div>
       <div className={styles.user}>
       <Dropdown menu={{items}}>
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            {user.username}
-            <DownOutlined />
-          </Space>
-        </a>
+        <Space>
+          {user.username}
+          <DownOutlined />
+        </Space>
       </Dropdown>
       </div>
     </header>

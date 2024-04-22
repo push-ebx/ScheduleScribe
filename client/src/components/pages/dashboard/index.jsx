@@ -1,6 +1,4 @@
 import styles from "./style.module.scss";
-import { Header } from '@/components/header'
-import {Sidebar} from "@/components/sidebar/index.jsx";
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 
@@ -9,9 +7,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar />
-      <main className={clsx("container", styles.cards)}>
+      <div className={styles.cards}>
         <div className={clsx(styles.today_events, styles.card)}>
           today_events
           <div className={styles.card_content}>
@@ -49,7 +45,7 @@ export const Dashboard = () => {
             content upcoming_events
           </div>
         </div>
-      </main>
+      </div>
     </>
   )
 }

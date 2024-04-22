@@ -1,0 +1,54 @@
+@import "@/components/app/vars";
+
+.sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: $sidebar-width;
+  bottom: 0;
+  left: 0;
+  top: $header-height;
+  background: #fff;
+}
+
+.navlink {
+  height: 30px;
+  width: 30px;
+  position: relative;
+
+  &::before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 3px;
+    background: $primary-color;
+    border-radius: 50px;
+    left: -7px;
+    opacity: 0;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+      transition: opacity .3s ease-out;
+    }
+  }
+}
+
+.active {
+  position: relative;
+
+  &::before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 3px;
+    background: $primary-color;
+    border-radius: 50px;
+    left: -7px;
+    opacity: 1;
+  }
+}

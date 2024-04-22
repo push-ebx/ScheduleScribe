@@ -17,5 +17,11 @@ export const ProtectedRoute = ({children}) => {
     }));
   }
 
-  return user ? children : "Загрузка...";
+  return (
+    user ?
+    children :
+    <div className="loader-container">
+      <div className="loader"/>
+    </div>
+  );
 };
