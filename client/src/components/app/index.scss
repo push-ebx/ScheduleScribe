@@ -33,3 +33,11 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@mixin for-desktop-down {
+  @media (max-width: 1440px) { @content; }
+}
+
+@mixin for-tablet-down {
+  @media (max-width: 1070px) { @content; }
+}

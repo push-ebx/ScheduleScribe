@@ -18,6 +18,7 @@ export const Sidebar = () => {
           <NavLink
             className={({ isActive }) => clsx(isActive && styles.active, styles.navlink) }
             to={item.path}
+            key={item.path}
           >
             {item.icon}
           </NavLink>

@@ -1,14 +1,16 @@
 import styles from "./style.module.scss";
-import { DownOutlined } from '@ant-design/icons';
-import {Button, Dropdown, Space} from 'antd';
+import {DownOutlined} from '@ant-design/icons';
+import {Dropdown, Space} from 'antd';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {clear} from "@/lib/slices/userSlice.js";
+import clsx from "clsx";
 
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const project = useSelector((state) => state.project);
 
   const items = [
     {
@@ -26,17 +28,20 @@ export const Header = () => {
   ];
 
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header)}>
       <div className={styles.logo}>
         ScheduleScribe
       </div>
+      <div>
+        {project.title}
+      </div>
       <div className={styles.user}>
-      <Dropdown menu={{items}}>
-        <Space>
-          {user.username}
-          <DownOutlined />
-        </Space>
-      </Dropdown>
+        <Dropdown menu={{items}}>
+          <Space>
+            {user.username}
+            <DownOutlined/>
+          </Space>
+        </Dropdown>
       </div>
     </header>
   )

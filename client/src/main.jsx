@@ -7,7 +7,7 @@ import {ConfigProvider} from 'antd';
 import {Provider} from "react-redux";
 import {store} from "@/lib/store.js";
 import {ProtectedRoute} from "@/components/layouts/protected-route.jsx";
-import {DashboardLayout} from "@/components/layouts/dashboardLayout.jsx";
+import {DashboardLayout} from "@/components/layouts/dashboard-layout.jsx";
 
 const router = createBrowserRouter([
   {

@@ -1,3 +1,5 @@
+@import "@/components/app/index";
+
 .card {
   .card_content {
     background: #fff;
@@ -15,28 +17,56 @@
   grid-template-rows: 5fr 3fr;
   padding: 50px;
   gap: 70px 30px;
+
+  @include for-desktop-down() {
+    //grid-template-rows: 1fr;
+  }
 }
 
 .today_events {
   grid-column: 1/3;
+
+  @include for-desktop-down() {
+    grid-column: 1/4;
+  }
 }
 
 .calendar {
   grid-column: 3/6;
+
+  @include for-desktop-down() {
+    grid-column: 4/7;
+  }
 }
 
 .info {
   grid-column: 6/7;
+
+  @include for-desktop-down() {
+    grid-column: 1/4;
+  }
 }
 
 .notes {
   grid-column: 1/3;
+
+  @include for-desktop-down() {
+    grid-column: 4/7;
+  }
 }
 
 .important_events {
   grid-column: 3/5;
+
+  @include for-desktop-down() {
+    grid-column: 1/4;
+  }
 }
 
 .upcoming_events {
   grid-column: 5/7;
+
+  @include for-desktop-down() {
+    grid-column: 4/7;
+  }
 }
