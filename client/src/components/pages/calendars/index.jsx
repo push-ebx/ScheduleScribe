@@ -8,7 +8,7 @@ export const Calendars = () => {
     <main>
       {
         project.id ?
-          <>Календари</>:
+          <><h1>{project.title}</h1></>:
           <Projects/>
       }
     </main>

@@ -17,9 +17,11 @@ export const CreateProject = ({onCreate}) => {
       const res = await createProject({title: values.title, description: values.description});
       form.resetFields();
 
-      onCreate({id: res.data.id, title: values.title, description: values.description});
-      setOpen(false);
-      setConfirmLoading(false);
+      setTimeout(() => {
+        onCreate({id: res.data.id, title: values.title, description: values.description});
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 500);
     } catch (err) {
       console.error('Validation failed:', err);
     }

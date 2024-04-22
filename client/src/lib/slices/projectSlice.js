@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
   title: '',
   id: '',
-  // current: null
+  description: ''
 }
 
 export const projectSlice = createSlice({
@@ -12,6 +12,7 @@ export const projectSlice = createSlice({
   reducers: {
     init: (state, action) => {
       state.title = action.payload.title;
+      state.description = action.payload.description;
       state.id = action.payload.id;
     },
   },
