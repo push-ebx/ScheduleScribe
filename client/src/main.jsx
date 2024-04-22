@@ -5,7 +5,7 @@ import {Auth, Calendars, Dashboard, Notes, Notifications} from "@/components/pag
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import {ConfigProvider} from 'antd';
 import {Provider} from "react-redux";
-import {store} from "@/lib/stotre.js";
+import {store} from "@/lib/store.js";
 import {ProtectedRoute} from "@/components/layouts/protected-route.jsx";
 import {DashboardLayout} from "@/components/layouts/dashboardLayout.jsx";
 

@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "../hooks/useAuth";
 import {init} from "@/lib/slices/userSlice.js";
 import {useDispatch} from "react-redux";
+import {Loader} from "@/components/ui/loader/index.jsx";
 
 export const ProtectedRoute = ({children}) => {
   const {user, isFetching} = useAuth();
@@ -20,8 +21,6 @@ export const ProtectedRoute = ({children}) => {
   return (
     user ?
     children :
-    <div className="loader-container">
-      <div className="loader"/>
-    </div>
+    <Loader/>
   );
 };
