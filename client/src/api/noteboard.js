@@ -5,8 +5,8 @@ export const createNoteboard = async ({title, description, project_id}) => {
   return res.data;
 };
 
-export const getNoteboards = async () => {
-  const res = await $api.get(`/noteboards/get`);
+export const getNoteboards = async ({project_id}) => {
+  const res = await $api.get(`/noteboards/get?project_id=${project_id}`);
   return res.data;
 };
 

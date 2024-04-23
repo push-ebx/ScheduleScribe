@@ -1,6 +1,6 @@
 import styles from "./style.module.scss";
 import {useEffect, useState} from "react";
-import {getProjects} from "@/api/projects.js";
+import {getProjects} from "@/api/project.js";
 import {Loader} from "@/components/ui/loader/index.jsx";
 import {ProjectCard} from "@/components/ui/projects/project-card.jsx";
 import {CreateProject} from "@/components/modals/create-project/index.jsx";
@@ -8,11 +8,14 @@ import {Space} from "antd";
 import clsx from "clsx";
 import {useDispatch} from "react-redux";
 import {init} from "@/lib/slices/projectSlice.js";
+import {useNavigate, useLocation} from "react-router-dom";
 
 export const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location= useLocation();
 
   const fetchProjects = async () => {
     const res = await getProjects();
@@ -34,6 +37,7 @@ export const Projects = () => {
 
   const handleSelect = ({id, title, description}) => {
     dispatch(init({id, title, description}));
+    navigate(`${location.pathname}?project_id=${id}`)
   }
 
   return (

@@ -1,20 +1,26 @@
-import {Button, Form, Input, Modal} from "antd";
+import {Button, Form, Input, Modal, Select} from "antd";
 import {useState} from "react";
-import {createProject} from "@/api/project.js";
+import {createNote} from "@/api/note.js";
+import {useSelector} from "react-redux";
 
 const {TextArea} = Input;
 
-export const CreateProject = ({onCreate}) => {
+export const CreateNote = ({onCreate}) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const project = useSelector((state) => state.project);
 
   const handleCreate = async () => {
     try {
       setConfirmLoading(true);
 
       const values = await form.validateFields();
-      const res = await createProject({title: values.title, description: values.description});
+      const res = await createNote({
+        title: values.title,
+        description: values.description,
+        project_id: project.id
+      });
       form.resetFields();
 
       setTimeout(() => {
@@ -31,7 +37,7 @@ export const CreateProject = ({onCreate}) => {
     <>
       <Button onClick={() => setOpen(true)}>Создать</Button>
       <Modal
-        title="Создание проекта"
+        title="Создание доски заметок"
         open={open}
         onOk={handleCreate}
         onCancel={() => setOpen(false)}
@@ -40,18 +46,18 @@ export const CreateProject = ({onCreate}) => {
       >
         <Form form={form} layout="vertical">
           <Form.Item
-            name="title"
-            label="Название"
-            rules={[{required: true, message: 'Пожалуйста, введите название проекта'}]}
-          >
-            <Input/>
-          </Form.Item>
-          <Form.Item
-            name="description"
-            label="Описание"
-            rules={[{required: true, message: 'Пожалуйста, введите описание проекта'}]}
+            name="content"
+            label="Содежимое"
+            rules={[{required: true, message: 'Пожалуйста, введите содержимое заметки'}]}
           >
             <TextArea rows={4}/>
+          </Form.Item>
+          <Form.Item
+            name="importance"
+            label="Приоритет"
+            rules={[{required: true, message: 'Пожалуйста, выберите приоритет заметки'}]}
+          >
+            <Select/>
           </Form.Item>
         </Form>
       </Modal>

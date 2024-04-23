@@ -2,17 +2,16 @@ import {Button, Card} from "antd";
 import {DeleteOutlined} from '@ant-design/icons';
 import styles from "./style.module.scss";
 import {useState} from "react";
-import {deleteProject} from "@/api/project.js";
+import {deleteNoteboard} from "@/api/noteboard.js";
 
-export const ProjectCard = ({id, title, description, onDelete, onSelect}) => {
+export const NoteboardCard = ({id, title, description, onDelete, onSelect}) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (e) => {
     e.stopPropagation();
 
     setIsDeleting(true);
-    await deleteProject({id});
-
+    await deleteNoteboard({id});
     setTimeout(() => {
       onDelete({id});
       setIsDeleting(false);
@@ -34,7 +33,7 @@ export const ProjectCard = ({id, title, description, onDelete, onSelect}) => {
         onClick={handleDelete}
         loading={isDeleting}
       >
-        Удалить проект
+        Удалить доску
       </Button>
     </Card>
   );

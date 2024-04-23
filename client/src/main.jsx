@@ -61,7 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     theme={{
       token: {
         colorPrimary: '#ff0025',
-        borderRadius: 10,
+        borderRadius: 5,
         colorBgContainer: '#f3f3f3',
       },
     }}

@@ -1,20 +1,26 @@
 import {Button, Form, Input, Modal} from "antd";
 import {useState} from "react";
-import {createProject} from "@/api/project.js";
+import {createNoteboard} from "@/api/noteboard.js";
+import {useSelector} from "react-redux";
 
 const {TextArea} = Input;
 
-export const CreateProject = ({onCreate}) => {
+export const CreateNoteboard = ({onCreate}) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const project = useSelector((state) => state.project);
 
   const handleCreate = async () => {
     try {
       setConfirmLoading(true);
 
       const values = await form.validateFields();
-      const res = await createProject({title: values.title, description: values.description});
+      const res = await createNoteboard({
+        title: values.title,
+        description: values.description,
+        project_id: project.id
+      });
       form.resetFields();
 
       setTimeout(() => {
@@ -31,7 +37,7 @@ export const CreateProject = ({onCreate}) => {
     <>
       <Button onClick={() => setOpen(true)}>Создать</Button>
       <Modal
-        title="Создание проекта"
+        title="Создание доски заметок"
         open={open}
         onOk={handleCreate}
         onCancel={() => setOpen(false)}
@@ -42,14 +48,14 @@ export const CreateProject = ({onCreate}) => {
           <Form.Item
             name="title"
             label="Название"
-            rules={[{required: true, message: 'Пожалуйста, введите название проекта'}]}
+            rules={[{required: true, message: 'Пожалуйста, введите название доски'}]}
           >
             <Input/>
           </Form.Item>
           <Form.Item
             name="description"
             label="Описание"
-            rules={[{required: true, message: 'Пожалуйста, введите описание проекта'}]}
+            rules={[{required: true, message: 'Пожалуйста, введите описание доски'}]}
           >
             <TextArea rows={4}/>
           </Form.Item>
