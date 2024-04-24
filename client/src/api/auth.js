@@ -10,7 +10,7 @@ export const login = async (username, password) => {
   return res.data;
 };
 
-export const registration = async (username, password) => {
-  const res = await $api.post(`/auth/registration`, {username, password});
+export const registration = async (username, password, url) => {
+  const res = await $api.post(`/auth/registration`, {username, password, url});
   return res.data;
 };

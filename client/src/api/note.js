@@ -5,8 +5,8 @@ export const createNote = async ({noteboard_id, content, importance}) => {
   return res.data;
 };
 
-export const getNotes = async () => {
-  const res = await $api.get(`/notes/get`);
+export const getNotes = async ({noteboard_id}) => {
+  const res = await $api.get(`/notes/get?noteboard_id=${noteboard_id}`);
   return res.data;
 };
 

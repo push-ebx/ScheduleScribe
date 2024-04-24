@@ -12,7 +12,9 @@ const router = express.Router();
 
 router.post("/auth/login", AuthController.login);
 router.post("/auth/registration", AuthController.registration);
+
 router.get("/user/get", authMiddleware, UserController.getUser);
+router.post("/user/upload", UserController.uploadImage);
 
 router.post("/project/create", authMiddleware, ProjectController.createProject);
 router.post("/project/add", authMiddleware, ProjectController.addProject);

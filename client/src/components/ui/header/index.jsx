@@ -1,6 +1,6 @@
 import styles from "./style.module.scss";
 import {DownOutlined} from '@ant-design/icons';
-import {Dropdown, Space} from 'antd';
+import {Avatar, Dropdown, Space} from 'antd';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {clear} from "@/lib/slices/userSlice.js";
@@ -38,6 +38,7 @@ export const Header = () => {
       <div className={styles.user}>
         <Dropdown menu={{items}}>
           <Space>
+            <Avatar src={user.url}>{user.username[0]}</Avatar>
             {user.username}
             <DownOutlined/>
           </Space>

@@ -1,0 +1,228 @@
+# Schedule
+
+###
+# group: auth
+# @name login
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123"
+}
+
+###
+# group: auth
+# @name registration
+# This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+# A successful POST request typically returns a `200 OK` or `201 Created` response code.
+POST {{base_url}}/auth/registration
+Content-Type: application/json
+
+{
+  "username": "admin2",
+  "password": "123"
+}
+
+> {%
+  // TODO: migrate to HTTP Client Response handler API
+  // pm.test("Successful POST request", function () {
+  //     pm.expect(pm.response.code).to.be.oneOf([200, 201]);
+  // });
+  //
+%}
+
+###
+# group: project
+# @name create
+POST {{base_url}}/project/create
+Content-Type: application/json
+
+{
+  "title": "Название #3",
+  "description": "Описание"
+}
+
+###
+# group: project
+# @name add
+POST {{base_url}}/project/add
+Content-Type: application/json
+
+{
+  "id": "c95d03e2-f5b1-4019-bd6b-54cbe1f8ed35"
+}
+
+###
+# group: project
+# @name get-all
+GET {{base_url}}/projects/get
+
+###
+# group: project
+# @name get
+GET {{base_url}}/project/get?
+    project_id=b0083b8f-7842-48d8-87c5-6b034172996c
+
+###
+# group: project
+# @name delete
+DELETE {{base_url}}/project/delete?
+    id=b0083b8f-7842-48d8-87c5-6b034172996c
+Content-Type: application/json
+
+{
+}
+
+###
+# group: noteboard
+# @name create
+POST {{base_url}}/noteboard/create
+Content-Type: application/json
+
+{
+  "title": "Название доски заметок",
+  "description": "Описание",
+  "project_id": "9087281c-ee12-4eb0-873f-49fb667f56df"
+}
+
+###
+# group: noteboard
+# @name get-all
+GET {{base_url}}/noteboards/get?
+    project_id=9087281c-ee12-4eb0-873f-49fb667f56df
+
+###
+# group: noteboard
+# @name get
+GET {{base_url}}/noteboard/get?
+    noteboard_id=2cfcb254-6749-463b-9b6b-62c7a51f98c9
+Content-Type: application/json
+
+{
+}
+
+###
+# group: noteboard
+# @name delete
+DELETE {{base_url}}/noteboard/delete?
+    id=2cfcb254-6749-463b-9b6b-62c7a51f98c9
+Content-Type: application/json
+
+{
+}
+
+###
+# group: calendar
+# @name create
+POST {{base_url}}/calendar/create
+Content-Type: application/json
+
+{
+  "title": "Название календаря",
+  "description": "Описание",
+  "project_id": "9087281c-ee12-4eb0-873f-49fb667f56df"
+}
+
+###
+# group: calendar
+# @name get-all
+GET {{base_url}}/calendars/get?
+    project_id=9087281c-ee12-4eb0-873f-49fb667f56df
+
+###
+# group: calendar
+# @name get
+GET {{base_url}}/calendar/get?
+    calendar_id=8b25d771-d7fd-43c5-add4-17dd32656e67
+Content-Type: application/json
+
+{
+}
+
+###
+# group: calendar
+# @name delete
+DELETE {{base_url}}/noteboard/delete?
+    id=2cfcb254-6749-463b-9b6b-62c7a51f98c9
+Content-Type: application/json
+
+{
+}
+
+###
+# group: note
+# @name create
+POST {{base_url}}/note/create
+Content-Type: application/json
+
+{
+  "noteboard_id": "9f81527c-f1a5-4034-a0f3-fd8554a7ce23",
+  "content": "содержимое",
+  "importance": 1
+}
+
+###
+# group: note
+# @name get-all
+GET {{base_url}}/notes/get?
+    noteboard_id=9f81527c-f1a5-4034-a0f3-fd8554a7ce23
+
+###
+# group: note
+# @name get
+GET {{base_url}}/note/get?
+    note_id=6f3b8106-ca96-4da9-b5ea-a63f98c60af2
+Content-Type: application/json
+
+{
+}
+
+###
+# group: note
+# @name delete
+DELETE {{base_url}}/calendar/delete?
+    id=8b25d771-d7fd-43c5-add4-17dd32656e67
+Content-Type: application/json
+
+{
+}
+
+###
+# group: events
+# @name create
+POST {{base_url}}/event/create
+Content-Type: application/json
+
+{
+  "title": "Название события",
+  "reminder_date": "2015-12-25 15:32:06.427",
+  "content": "содержимое события",
+  "calendar_id": "463f1d39-f699-4fad-a073-f09bb912686d"
+}
+
+###
+# group: events
+# @name get-all
+GET {{base_url}}/events/get?
+    calendar_id=463f1d39-f699-4fad-a073-f09bb912686d
+
+###
+# group: events
+# @name get
+GET {{base_url}}/event/get?
+    event_id=def2303c-26d3-4846-a043-46c889d1ac60
+Content-Type: application/json
+
+{
+}
+
+###
+# group: events
+# @name delete
+DELETE {{base_url}}/event/delete?
+    id=def2303c-26d3-4846-a043-46c889d1ac60
+Content-Type: application/json
+
+{
+}

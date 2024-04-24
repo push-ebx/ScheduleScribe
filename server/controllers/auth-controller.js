@@ -9,7 +9,8 @@ const generateAccessToken = (id) => {
 class AuthController {
   async registration(req, res) {
     try {
-      const {username, password} = req.body;
+      const {username, password, url} = req.body;
+      console.log(url)
       const [users] = await mysql.query(`SELECT username FROM users WHERE username='${username}'`);
 
       if (users.length) {
@@ -22,7 +23,7 @@ class AuthController {
 
       const hash_password = bcrypt.hashSync(password, 7)
 
-      await mysql.query(`INSERT INTO users (username, hash_password) VALUES ('${username}', '${hash_password}');`);
+      await mysql.query(`INSERT INTO users (username, hash_password, url) VALUES ('${username}', '${hash_password}', '${url}');`);
       const [[{id}]] = await mysql.query(`SELECT LAST_INSERT_ID() as id;`);
       const token = generateAccessToken(id);
 

@@ -9,7 +9,7 @@ export const CreateNote = ({onCreate}) => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const project = useSelector((state) => state.project);
+  const noteboard = useSelector((state) => state.noteboard);
 
   const handleCreate = async () => {
     try {
@@ -17,20 +17,30 @@ export const CreateNote = ({onCreate}) => {
 
       const values = await form.validateFields();
       const res = await createNote({
-        title: values.title,
-        description: values.description,
-        project_id: project.id
+        content: values.content,
+        importance: values.importance ?? "1",
+        noteboard_id: noteboard.id
       });
       form.resetFields();
 
       setTimeout(() => {
-        onCreate({id: res.data.id, title: values.title, description: values.description});
+        onCreate({
+          id: res.data.id,
+          content: values.content,
+          importance: values.importance ?? "1",
+          noteboard_id: noteboard.id
+        });
         setOpen(false);
         setConfirmLoading(false);
       }, 500);
     } catch (err) {
       console.error('Validation failed:', err);
+      setConfirmLoading(false);
     }
+  };
+
+  const handleChangeImportance = (value) => {
+    console.log(`selected ${value}`);
   };
 
   return (
@@ -50,14 +60,22 @@ export const CreateNote = ({onCreate}) => {
             label="Содежимое"
             rules={[{required: true, message: 'Пожалуйста, введите содержимое заметки'}]}
           >
-            <TextArea rows={4}/>
+            <TextArea rows={5} />
           </Form.Item>
           <Form.Item
             name="importance"
             label="Приоритет"
-            rules={[{required: true, message: 'Пожалуйста, выберите приоритет заметки'}]}
           >
-            <Select/>
+            <Select
+              defaultValue="1"
+              style={{ width: 150 }}
+              onChange={handleChangeImportance}
+              options={[
+                { value: '1', label: 'Низкий' },
+                { value: '2', label: 'Средний' },
+                { value: '3', label: 'Высокий' }
+              ]}
+            />
           </Form.Item>
         </Form>
       </Modal>

@@ -41,3 +41,12 @@ body {
 @mixin for-tablet-down {
   @media (max-width: 1070px) { @content; }
 }
+
+.ant-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 45vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}

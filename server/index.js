@@ -7,6 +7,7 @@ const {requestLogger, requestError} = require("./utils");
 const mysql2 = require("mysql2/promise");
 const config = require("./db/config.json");
 const http = require('http');
+const fileUpload = require('express-fileupload');
 
 dotenv.config();
 
@@ -22,7 +23,15 @@ app
   .use(express.json())
   .use(bodyParser.json())
   .use('/api', router)
-  .use(requestError);
+  .use(requestError)
+  .use(fileUpload())
+  .use(express.static('public'));
+
+app.post('/upload', (req, res) => {
+  const { avatar } = req.files;
+  avatar.mv(__dirname + '/public/' + avatar.name);
+  res.send({status: 'ok', success: true, url: `http://localhost:4000/${avatar.name}`});
+});
 
 server.listen(port, 'localhost',() => {
   console.log(`Server is running at http://localhost:${port}`);

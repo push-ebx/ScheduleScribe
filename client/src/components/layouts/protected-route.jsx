@@ -15,6 +15,7 @@ export const ProtectedRoute = ({children}) => {
     dispatch(init({
       username: user.username,
       id: user.id,
+      url: user.url,
     }));
   }
 

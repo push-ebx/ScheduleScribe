@@ -21,6 +21,22 @@ class UserController {
       next(e);
     }
   }
+
+  async uploadImage(req, res, next) {
+    try {
+      const { avatar } = req.files;
+
+      // If no image submitted, exit
+      if (!image) return res.sendStatus(400);
+
+      // Move the uploaded image to our public folder
+      image.mv(__dirname + '/public/' + image.name);
+
+      res.sendStatus(200);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new UserController();
