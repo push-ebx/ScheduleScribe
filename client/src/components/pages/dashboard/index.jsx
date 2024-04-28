@@ -1,7 +1,7 @@
 import styles from "./style.module.scss";
 import clsx from "clsx";
 import {useSelector} from "react-redux";
-import {Calendar, Card, theme, Typography} from 'antd';
+import {Calendar, theme, Typography} from 'antd';
 import {Info} from "@/components/ui/info/index.jsx";
 import {TodayEvents} from "@/components/ui/today-events/index.jsx";
 import {UpcomingEvents} from "@/components/ui/upcoming-events/index.jsx";
@@ -47,7 +47,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <div className={clsx(styles.info, styles.card)}>
-          <Typography.Title className={styles.title} level={3}>Статистика</Typography.Title>
+          <Typography.Title className={styles.title} level={3}>Статистика событий</Typography.Title>
           <div className={styles.card_content}>
             <Info/>
           </div>

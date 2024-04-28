@@ -37,7 +37,8 @@ export const Auth = (() => {
     const res = await registration(username, password, imageUrl);
 
     if (res.success) {
-      message.success('Регистрация прошла успешно! Вы можете войти в аккаунт.');
+      message.success('Регистрация прошла успешно!');
+      await handleLogin();
     } else {
       message.error(`${res.message}`);
     }

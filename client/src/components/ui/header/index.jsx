@@ -1,6 +1,5 @@
 import styles from "./style.module.scss";
-import {DownOutlined} from '@ant-design/icons';
-import {Avatar, Breadcrumb, Dropdown, Space} from 'antd';
+import {Avatar, Dropdown, Space} from 'antd';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {clear} from "@/lib/slices/userSlice.js";
@@ -11,8 +10,6 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const project = useSelector((state) => state.project);
-  const noteboard = useSelector((state) => state.noteboard);
 
   const items = [
     {
@@ -45,7 +42,7 @@ export const Header = () => {
             >
               {user.username[0]}
             </Avatar>
-            {user.username}
+            <p style={{fontSize: 16}}>{user.username}</p>
           </Space>
         </Dropdown>
       </div>

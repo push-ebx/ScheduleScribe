@@ -9,8 +9,8 @@
   gap: 40px;
   width: $sidebar-width;
   bottom: 10px;
-  left: 10px;
-  top: $header-height + 10px;
+  left: 20px;
+  top: $header-height + 20px;
   border-radius: 10px;
   background: #fff;
 }
@@ -32,7 +32,10 @@
   }
 
   &:hover {
+    transform: scale(1.07);
+    transition: transform .1s ease-out;
     &::before {
+      transform: scale(0.93);
       opacity: 1;
       transition: opacity .3s ease-out;
     }
