@@ -6,14 +6,8 @@
 }
 
 .card {
-  width: 300px;
+  background: #fff;
   cursor: pointer;
-  
-  &:hover {
-    box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-    -webkit-box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-    -moz-box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-  }
 }
 
 .space {
@@ -23,4 +17,10 @@
 
 .description {
   word-wrap: break-word;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

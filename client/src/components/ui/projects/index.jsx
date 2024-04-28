@@ -9,6 +9,7 @@ import clsx from "clsx";
 import {useDispatch} from "react-redux";
 import {init} from "@/lib/slices/projectSlice.js";
 import {useNavigate, useLocation} from "react-router-dom";
+import {ProjectOutlined} from "@ant-design/icons";
 
 export const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -41,7 +42,8 @@ export const Projects = () => {
   }
 
   return (
-    <section>
+    <section className={styles.main}>
+      <h1>Проекты <ProjectOutlined /></h1>
       <Space wrap className={clsx(styles.projects, styles.space)}>
         {
           projects.length ? projects.map(project => (
@@ -56,7 +58,7 @@ export const Projects = () => {
             )) :
             isFetching ?
               <Loader/> :
-              "проекты не найдены"
+              "Проекты не найдены"
         }
         <CreateProject onCreate={handleCreate}/>
       </Space>

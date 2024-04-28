@@ -24,6 +24,7 @@ export const ProjectCard = ({id, title, description, onDelete, onSelect}) => {
       key={id}
       title={title}
       className={styles.card}
+      hoverable
       onClick={() => onSelect({id, title, description})}
     >
       <div className={styles.description}>{description}</div>

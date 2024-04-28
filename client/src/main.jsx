@@ -60,9 +60,23 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ConfigProvider
     theme={{
       token: {
-        colorPrimary: '#ff0025',
+        colorPrimary: '#ff5555',
         borderRadius: 5,
-        colorBgContainer: '#f3f3f3',
+        colorBgContainer: '#fff',
+        colorText: '#343434',
+      },
+      components: {
+        Statistic: {
+          contentFontSize: 36,
+          titleFontSize: 14
+        },
+        Calendar: {
+          fullBg: 'transparent',
+          transparent: 'transparent'
+        },
+        List: {
+          itemPadding: '18px 12px'
+        }
       },
     }}
   >

@@ -3,9 +3,9 @@ const noteService = require('../services/note-service');
 class NoteController {
   async createNote(req, res, next) {
     try {
-      const {noteboard_id, content, importance} = req.body;
-      const id = await noteService.createNote(noteboard_id, content, importance);
-      return res.send({status: 'ok', success: true, message: 'Заметка успешно создана!', data: {id}});
+      const {noteboard_id, content, importance, title} = req.body;
+      const {id, creation_date} = await noteService.createNote(noteboard_id, content, importance, req.user_id, title);
+      return res.send({status: 'ok', success: true, message: 'Заметка успешно создана!', data: {id, creation_date}});
     } catch (e) {
       next(e);
     }
@@ -41,6 +41,22 @@ class NoteController {
     try {
       await noteService.deleteNote(id);
       return res.send({status: 'ok', success: true, message: 'Заметка успешно удалена'});
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async changeImportance(req, res, next) {
+    const {note_id, importance} = req.query;
+
+    if (!note_id) {
+      return res.status(400).send({status: 'error', success: false, message: 'Необходим идентификатор заметки'});
+    }
+
+    try {
+      await noteService.changeImportance(note_id, importance);
+      console.log(note_id, importance)
+      return res.send({status: 'ok', success: true, message: 'Приоритет заметки успешно изменен'});
     } catch (e) {
       next(e);
     }

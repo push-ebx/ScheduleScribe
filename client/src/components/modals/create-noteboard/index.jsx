@@ -1,7 +1,8 @@
-import {Button, Form, Input, Modal} from "antd";
+import {Button, FloatButton, Form, Input, Modal, Tooltip} from "antd";
 import {useState} from "react";
 import {createNoteboard} from "@/api/noteboard.js";
 import {useSelector} from "react-redux";
+import {PlusOutlined} from "@ant-design/icons";
 
 const {TextArea} = Input;
 
@@ -35,7 +36,9 @@ export const CreateNoteboard = ({onCreate}) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Создать</Button>
+      <Tooltip title={"Создать доску заметок"} placement={"top"}>
+        <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
+      </Tooltip>
       <Modal
         title="Создание доски заметок"
         open={open}

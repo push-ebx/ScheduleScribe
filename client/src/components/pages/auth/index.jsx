@@ -160,7 +160,7 @@ export const Auth = (() => {
                         beforeUpload={beforeUpload}
                         onChange={handleChange}
                       >
-                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', borderRadius: "50%" }} /> : uploadButton}
+                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', borderRadius: "50%", objectFit: 'cover', height: '100%' }} /> : uploadButton}
                       </Upload>
                     </Form.Item>
                     <Form.Item>

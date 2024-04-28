@@ -31,6 +31,7 @@ router.post("/note/create", authMiddleware, NoteController.createNote);
 router.get("/notes/get", authMiddleware, NoteController.getNotes);
 router.get("/note/get", authMiddleware, NoteController.getNote);
 router.delete("/note/delete", authMiddleware, NoteController.deleteNote);
+router.post("/note/changeImportance", authMiddleware, NoteController.changeImportance);
 
 router.post("/calendar/create", authMiddleware, CalendarController.createCalendar);
 router.get("/calendars/get", authMiddleware, CalendarController.getCalendars);

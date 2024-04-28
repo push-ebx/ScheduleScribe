@@ -5,7 +5,7 @@ import clsx from "clsx";
 import {Tooltip} from "antd";
 
 const sidebarItems = [
-  {id: 1, icon: <Grid />, path: '/dashboard', title: 'Главная'},
+  {id: 1, icon: <Grid />, path: '/dashboard', title: 'Статистика'},
   {id: 2, icon: <Calendar />, path: '/calendars', title: 'Календари'},
   {id: 3, icon: <Notes />, path: '/notes', title: 'Заметки'},
   {id: 4, icon: <Notification />, path: '/notifications', title: 'Уведомления'},

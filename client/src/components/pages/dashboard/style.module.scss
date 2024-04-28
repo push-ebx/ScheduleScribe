@@ -1,11 +1,16 @@
 @import "@/components/app/index";
 
 .card {
+  .title {
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
   .card_content {
     background: #fff;
     border-radius: 10px;
-    padding: 10px;
     height: 100%;
+    overflow-y: auto;
   }
 }
 
@@ -13,10 +18,11 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 5fr 3fr;
-  padding: 50px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 4fr 3fr;
+  padding: 30px 40px;
   gap: 70px 30px;
+  padding-bottom: 100px;
 
   @include for-desktop-down() {
     //grid-template-rows: 1fr;
@@ -24,49 +30,56 @@
 }
 
 .today_events {
-  grid-column: 1/3;
+  height: 47vh;
+  grid-column: 1/5;
 
   @include for-desktop-down() {
-    grid-column: 1/4;
+    grid-column: 1/6;
   }
 }
 
 .calendar {
-  grid-column: 3/6;
+  height: 47vh;
+  grid-column: 5/10;
 
   @include for-desktop-down() {
-    grid-column: 4/7;
+    grid-column: 6/13;
   }
 }
 
 .info {
-  grid-column: 6/7;
+  height: 47vh;
+  grid-column: 10/13;
 
   @include for-desktop-down() {
-    grid-column: 1/4;
+    grid-column: 1/7;
   }
 }
 
 .notes {
-  grid-column: 1/3;
+  height: 27vh;
+  grid-column: 1/5;
 
   @include for-desktop-down() {
-    grid-column: 4/7;
+    grid-column: 7/13;
+    height: 47vh;
   }
 }
 
 .important_events {
-  grid-column: 3/5;
+  height: 27vh;
+  grid-column: 5/9;
 
   @include for-desktop-down() {
-    grid-column: 1/4;
+    grid-column: 1/7;
   }
 }
 
 .upcoming_events {
-  grid-column: 5/7;
+  height: 27vh;
+  grid-column: 9/13;
 
   @include for-desktop-down() {
-    grid-column: 4/7;
+    grid-column: 7/13;
   }
 }

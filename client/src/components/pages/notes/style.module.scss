@@ -4,7 +4,9 @@
   display: flex;
   width: 100vw;
   height: 100%;
-  padding: 5rem;
+  padding: 1.5rem 5rem 5rem;
+  gap: 20px;
+  flex-direction: column;
 }
 
 .board {
@@ -15,13 +17,18 @@
   word-wrap: break-word;
 }
 
-.card {
-  width: 300px;
-  cursor: pointer;
+.low {
+  color: #17c400 !important;
+}
 
-  &:hover {
-    box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-    -webkit-box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-    -moz-box-shadow: 0px 1px 27px -7px $primary-shadow-color;
-  }
+.medium {
+  color: #c98300 !important;
+}
+
+.high {
+  color: #ff3c3c !important;
+}
+
+.card {
+  background: #fff;
 }

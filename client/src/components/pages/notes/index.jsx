@@ -4,12 +4,13 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import {Noteboards} from "@/components/ui/noteboards";
 import {Projects} from "@/components/ui/projects/index.jsx";
 import {useEffect, useState} from "react";
-import {getNotes} from "@/api/note.js";
+import {deleteNote, getNotes} from "@/api/note.js";
 import {CreateNote} from "@/components/modals/create-note/index.jsx";
-import {Button} from "antd";
+import {Breadcrumb, Button, Flex, Tooltip} from "antd";
 import {useLocation, useNavigate} from "react-router-dom";
 import {init as initNoteboard} from "@/lib/slices/noteboardSlice.js";
 import {NoteCard} from "@/components/pages/notes/note-card.jsx";
+import {ArrowLeftOutlined} from "@ant-design/icons";
 
 export const Notes = () => {
   const project = useSelector((state) => state.project);
@@ -22,6 +23,7 @@ export const Notes = () => {
 
   const fetchNotes = async () => {
     const res = await getNotes({noteboard_id: noteboard.id});
+    console.log(res.data)
     setNotes(res.data)
   }
 
@@ -34,29 +36,51 @@ export const Notes = () => {
     navigate(`${location.pathname}?project_id=${project.id}`);
   }
 
-  const handleCreate = ({id, content, importance, noteboard_id}) => {
-    setNotes(prev => [...prev, {id, content, importance, noteboard_id}]);
+  const handleCreate = ({id, content, importance, noteboard_id, title, username, url}) => {
+    setNotes(prev => [...prev, {id, content, importance, noteboard_id, title, username, url}]);
+  }
+
+  const handleDelete = async (id) => {
+    setNotes(prev => prev.filter(note => note.id !== id));
+    await deleteNote({id});
   }
 
   return (
     <main className={styles.main}>
+      <Breadcrumb
+        items={[
+          {
+            title: 'Заметки',
+          },
+          project.title ? {
+            title: project.title,
+          } : {},
+          noteboard.title ? {
+            title: noteboard.title,
+          } : {}
+        ]}
+      />
       {
         project.id && noteboard.id ?
-          <div className={styles.board}>
-            <Button onClick={toNoteboards}>К списку досок</Button>
-            <h1>{noteboard.title}</h1>
+          <Flex className={styles.board} vertical gap={30}>
+            <Flex align={"end"} gap={10}>
+              <Tooltip title={"К списку досок"} placement={"top"}>
+                <Button shape={"circle"} type={"text"} onClick={toNoteboards}><ArrowLeftOutlined/></Button>
+              </Tooltip>
+              <h1>{noteboard.title}</h1>
+            </Flex>
             <ResponsiveMasonry
-              columnsCountBreakPoints={{350: 1, 750: 2, 1200: 3}}
+              columnsCountBreakPoints={{320: 1, 880: 2, 1150: 3, 1450: 4}}
               style={{width: '100%'}}
             >
               <Masonry gutter={"10px"}>
                 {notes.map((item, index) => (
-                  <NoteCard key={index} content={item.content}/>
+                  <NoteCard key={index} note={item} onDelete={() => handleDelete(item.id)}/>
                 ))}
                 <CreateNote onCreate={handleCreate}/>
               </Masonry>
             </ResponsiveMasonry>
-          </div> :
+          </Flex> :
           project.id ?
             <Noteboards/> :
             <Projects/>

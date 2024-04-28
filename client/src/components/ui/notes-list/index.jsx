@@ -21,7 +21,7 @@ const data = [
   },
 ];
 
-export const TodayEvents = () => {
+export const NotesList = () => {
   return (
     <List
       itemLayout="horizontal"

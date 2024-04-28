@@ -1,6 +1,7 @@
-import {Button, Form, Input, Modal} from "antd";
+import {Button, FloatButton, Form, Input, Modal, Tooltip} from "antd";
 import {useState} from "react";
 import {createProject} from "@/api/project.js";
+import {PlusOutlined, ProjectOutlined} from "@ant-design/icons";
 
 const {TextArea} = Input;
 
@@ -29,7 +30,9 @@ export const CreateProject = ({onCreate}) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Создать</Button>
+      <Tooltip title={"Создать новый проект"} placement={"top"}>
+        <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
+      </Tooltip>
       <Modal
         title="Создание проекта"
         open={open}

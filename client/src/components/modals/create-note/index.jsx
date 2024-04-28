@@ -1,7 +1,10 @@
-import {Button, Form, Input, Modal, Select} from "antd";
+import {FloatButton, Form, Input, Modal, Tooltip} from "antd";
 import {useState} from "react";
 import {createNote} from "@/api/note.js";
 import {useSelector} from "react-redux";
+import { Segmented } from 'antd';
+import styles from "./style.module.scss";
+import {PlusOutlined} from "@ant-design/icons";
 
 const {TextArea} = Input;
 
@@ -10,6 +13,7 @@ export const CreateNote = ({onCreate}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const noteboard = useSelector((state) => state.noteboard);
+  const user = useSelector((state) => state.user);
 
   const handleCreate = async () => {
     try {
@@ -19,18 +23,22 @@ export const CreateNote = ({onCreate}) => {
       const res = await createNote({
         content: values.content,
         importance: values.importance ?? "1",
-        noteboard_id: noteboard.id
+        noteboard_id: noteboard.id,
+        title: values.title
       });
-      form.resetFields();
 
       setTimeout(() => {
         onCreate({
           id: res.data.id,
           content: values.content,
           importance: values.importance ?? "1",
-          noteboard_id: noteboard.id
+          noteboard_id: noteboard.id,
+          title: values.title,
+          username: user.username,
+          url: user.url
         });
         setOpen(false);
+        form.resetFields();
         setConfirmLoading(false);
       }, 500);
     } catch (err) {
@@ -39,13 +47,11 @@ export const CreateNote = ({onCreate}) => {
     }
   };
 
-  const handleChangeImportance = (value) => {
-    console.log(`selected ${value}`);
-  };
-
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Создать</Button>
+      <Tooltip title={"Создать заметку"} placement={"top"}>
+        <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
+      </Tooltip>
       <Modal
         title="Создание доски заметок"
         open={open}
@@ -56,25 +62,30 @@ export const CreateNote = ({onCreate}) => {
       >
         <Form form={form} layout="vertical">
           <Form.Item
+            name="title"
+            label="Название заметки:"
+            rules={[{required: true, message: 'Пожалуйста, введите название заметки'}]}
+          >
+            <Input/>
+          </Form.Item>
+          <Form.Item
             name="content"
-            label="Содежимое"
+            label="Содежимое:"
             rules={[{required: true, message: 'Пожалуйста, введите содержимое заметки'}]}
           >
             <TextArea rows={5} />
           </Form.Item>
           <Form.Item
             name="importance"
-            label="Приоритет"
+            label="Приоритет:"
           >
-            <Select
-              defaultValue="1"
-              style={{ width: 150 }}
-              onChange={handleChangeImportance}
+            <Segmented
               options={[
-                { value: '1', label: 'Низкий' },
-                { value: '2', label: 'Средний' },
-                { value: '3', label: 'Высокий' }
+                { value: '1', label: 'Низкий', className: styles.low },
+                { value: '2', label: 'Средний', className: styles.medium },
+                { value: '3', label: 'Высокий', className: styles.high }
               ]}
+              size="middle"
             />
           </Form.Item>
         </Form>
