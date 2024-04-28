@@ -19,9 +19,10 @@ export const Dashboard = () => {
 
   const {token} = theme.useToken();
   const wrapperStyle = {
-    padding: '30px 90px',
+    padding: '30px',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     height: '100%',
     border: `1px solid ${token.colorBorderSecondary}`,

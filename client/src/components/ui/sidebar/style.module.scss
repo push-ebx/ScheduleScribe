@@ -1,4 +1,5 @@
 @import "@/components/app/vars";
+@import "@/components/app/index";
 
 .sidebar {
   position: fixed;
@@ -13,6 +14,10 @@
   top: $header-height + 20px;
   border-radius: 10px;
   background: #fff;
+
+  @include for-tablet-down() {
+    left: 0;
+  }
 }
 
 .navlink {

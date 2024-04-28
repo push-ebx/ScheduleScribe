@@ -11,9 +11,16 @@
   z-index: 999;
   background: #fff;
   border-radius: 0 0 10px 10px;
+  border: 1px solid #eeeeee;
   top: 0;
   left: 20px;
   right: 20px;
+
+  @include for-tablet-down() {
+    left: 0;
+    right: 0;
+    padding: 20px;
+  }
 
   .logo {
     cursor: default;

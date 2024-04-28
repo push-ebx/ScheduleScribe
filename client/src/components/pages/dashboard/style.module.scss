@@ -25,6 +25,10 @@ $second_row_height: $first_row_height - 15vh;
   padding: 20px 20px 30px 40px;
   gap: 70px 30px;
 
+  @include for-tablet-down() {
+    padding: 20px 5px 30px 10px;
+  }
+
   @include for-desktop-down() {
     //grid-template-rows: 1fr;
   }
@@ -37,6 +41,10 @@ $second_row_height: $first_row_height - 15vh;
   @include for-desktop-down() {
     grid-column: 1/6;
   }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
+  }
 }
 
 .calendar {
@@ -45,6 +53,10 @@ $second_row_height: $first_row_height - 15vh;
 
   @include for-desktop-down() {
     grid-column: 6/13;
+  }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
   }
 }
 
@@ -55,6 +67,10 @@ $second_row_height: $first_row_height - 15vh;
   @include for-desktop-down() {
     grid-column: 1/7;
   }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
+  }
 }
 
 .notes {
@@ -63,7 +79,11 @@ $second_row_height: $first_row_height - 15vh;
 
   @include for-desktop-down() {
     grid-column: 7/13;
-    height: 47vh;
+    height: $first_row_height;
+  }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
   }
 }
 
@@ -74,6 +94,10 @@ $second_row_height: $first_row_height - 15vh;
   @include for-desktop-down() {
     grid-column: 1/7;
   }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
+  }
 }
 
 .upcoming_events {
@@ -82,5 +106,9 @@ $second_row_height: $first_row_height - 15vh;
 
   @include for-desktop-down() {
     grid-column: 7/13;
+  }
+
+  @include for-tablet-down() {
+    grid-column: 1/13;
   }
 }
