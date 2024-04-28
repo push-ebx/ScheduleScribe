@@ -41,7 +41,7 @@ export const Dashboard = () => {
           <Typography.Title className={styles.title} level={3}>Календарь</Typography.Title>
           <div className={styles.card_content}>
             <div style={wrapperStyle}>
-              <Calendar fullscreen={false} onPanelChange={onPanelChange}/>
+              <Calendar locale="ru-RU" fullscreen={false} onPanelChange={onPanelChange}/>
             </div>
             {/*{JSON.stringify(user)}*/}
           </div>

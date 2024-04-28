@@ -1,5 +1,8 @@
 @import "@/components/app/index";
 
+$first_row_height: 45vh;
+$second_row_height: $first_row_height - 15vh;
+
 .card {
   .title {
     opacity: 0.7;
@@ -19,7 +22,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 4fr 3fr;
   padding: 30px 40px;
   gap: 70px 30px;
   padding-bottom: 100px;
@@ -30,7 +32,7 @@
 }
 
 .today_events {
-  height: 47vh;
+  height: $first_row_height;
   grid-column: 1/5;
 
   @include for-desktop-down() {
@@ -39,7 +41,7 @@
 }
 
 .calendar {
-  height: 47vh;
+  height: $first_row_height;
   grid-column: 5/10;
 
   @include for-desktop-down() {
@@ -48,7 +50,7 @@
 }
 
 .info {
-  height: 47vh;
+  height: $first_row_height;
   grid-column: 10/13;
 
   @include for-desktop-down() {
@@ -57,7 +59,7 @@
 }
 
 .notes {
-  height: 27vh;
+  height: $second_row_height;
   grid-column: 1/5;
 
   @include for-desktop-down() {
@@ -67,7 +69,7 @@
 }
 
 .important_events {
-  height: 27vh;
+  height: $second_row_height;
   grid-column: 5/9;
 
   @include for-desktop-down() {
@@ -76,7 +78,7 @@
 }
 
 .upcoming_events {
-  height: 27vh;
+  height: $second_row_height;
   grid-column: 9/13;
 
   @include for-desktop-down() {
