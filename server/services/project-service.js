@@ -15,7 +15,6 @@ class ProjectService {
   async addProject(user_id, project_id) {
     try {
       const [existingProject] = await mysql.query(`SELECT * FROM project_user WHERE user_id='${user_id}' AND project_id='${project_id}'`);
-      console.log(existingProject);
       if (existingProject.length === 0) {
         await mysql.query(`INSERT INTO project_user (user_id, project_id) VALUES ('${user_id}', '${project_id}')`);
         return 0;

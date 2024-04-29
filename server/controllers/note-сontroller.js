@@ -55,7 +55,6 @@ class NoteController {
 
     try {
       await noteService.changeImportance(note_id, importance);
-      console.log(note_id, importance)
       return res.send({status: 'ok', success: true, message: 'Приоритет заметки успешно изменен'});
     } catch (e) {
       next(e);

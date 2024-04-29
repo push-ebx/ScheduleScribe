@@ -10,7 +10,6 @@ class AuthController {
   async registration(req, res) {
     try {
       const {username, password, url} = req.body;
-      console.log(url)
       const [users] = await mysql.query(`SELECT username FROM users WHERE username='${username}'`);
 
       if (users.length) {

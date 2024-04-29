@@ -23,7 +23,6 @@ export const Notes = () => {
 
   const fetchNotes = async () => {
     const res = await getNotes({noteboard_id: noteboard.id});
-    console.log(res.data)
     setNotes(res.data)
   }
 

@@ -1,7 +1,6 @@
 class UserController {
   async getUser(req, res, next) {
     try {
-      console.log(req.user_id)
       const [[user]] = await mysql.query(`SELECT * from users WHERE id='${req.user_id}'`);
 
       if (user) {

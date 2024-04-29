@@ -5,8 +5,8 @@ export const createCalendar = async ({title, description, project_id}) => {
   return res.data;
 };
 
-export const getCalendars = async () => {
-  const res = await $api.get(`/calendars/get`);
+export const getCalendars = async ({project_id}) => {
+  const res = await $api.get(`/calendars/get?project_id=${project_id}`);
   return res.data;
 };
 
