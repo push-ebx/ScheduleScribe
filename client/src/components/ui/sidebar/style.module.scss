@@ -10,9 +10,9 @@
   gap: 40px;
   width: $sidebar-width;
   bottom: 10px;
-  left: 20px;
+  left: 0px;
   top: $header-height + 20px;
-  border-radius: 10px;
+  border-radius: 0 10px 10px 0;
   background: #fff;
 
   @include for-tablet-down() {
@@ -30,7 +30,7 @@
     height: 100%;
     position: absolute;
     width: 2px;
-    background: $primary-color;
+    background: $accent-color;
     border-radius: 50px;
     left: -7px;
     opacity: 0;
@@ -55,7 +55,7 @@
     height: 100%;
     position: absolute;
     width: 2px;
-    background: $primary-color;
+    background: $accent-color;
     border-radius: 50px;
     left: -7px;
     opacity: 1;

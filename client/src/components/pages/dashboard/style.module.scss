@@ -22,7 +22,7 @@ $second_row_height: $first_row_height - 15vh;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  padding: 20px 20px 30px 40px;
+  padding: 20px 30px 30px 30px;
   gap: 70px 30px;
 
   @include for-tablet-down() {

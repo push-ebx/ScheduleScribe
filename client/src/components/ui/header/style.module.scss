@@ -2,6 +2,12 @@
 @import "@/components/app/index";
 
 .header {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,12 +15,11 @@
   height: $header-height;
   position: fixed;
   z-index: 999;
-  background: #fff;
   border-radius: 0 0 10px 10px;
   border: 1px solid #eeeeee;
   top: 0;
-  left: 20px;
-  right: 20px;
+  left: 0px;
+  right: 0px;
 
   @include for-tablet-down() {
     left: 0;
@@ -29,7 +34,7 @@
     font-weight: 700;
 
     &:first-letter {
-      color: $primary-color;
+      color: $accent-color;
     }
     // color: $
   }
