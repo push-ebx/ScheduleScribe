@@ -32,7 +32,7 @@ export const Calendars = () => {
     project.id && fetchCalendars();
   }, [project]);
 
-  const toCalendars = () => {
+  const toProjects = () => {
     dispatch(initProject({}));
     navigate(`${location.pathname}`);
   }
@@ -73,7 +73,7 @@ export const Calendars = () => {
             <Flex className={styles.board} vertical gap={30}>
               <Flex align={"end"} gap={10}>
                 <Tooltip title={"К списку проектов"} placement={"top"}>
-                  <Button shape={"circle"} type={"text"} onClick={toCalendars}><ArrowLeftOutlined/></Button>
+                  <Button shape={"circle"} type={"text"} onClick={toProjects}><ArrowLeftOutlined/></Button>
                 </Tooltip>
                 <h1>{calendar.title}</h1>
               </Flex>

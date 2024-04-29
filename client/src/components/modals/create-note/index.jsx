@@ -1,4 +1,4 @@
-import {FloatButton, Form, Input, Modal, Tooltip} from "antd";
+import {FloatButton, Form, Input, Modal, Tooltip, Typography} from "antd";
 import {useState} from "react";
 import {createNote} from "@/api/note.js";
 import {useSelector} from "react-redux";
@@ -53,7 +53,7 @@ export const CreateNote = ({onCreate}) => {
         <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
       </Tooltip>
       <Modal
-        title="Создание доски заметок"
+        title="Создание заметки"
         open={open}
         onOk={handleCreate}
         onCancel={() => setOpen(false)}

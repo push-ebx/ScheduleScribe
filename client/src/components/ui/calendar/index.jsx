@@ -1,8 +1,11 @@
+import styles from './style.module.scss';
 import {Badge, Button, Calendar as AntdCalendar, Tooltip} from 'antd';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {init as initCalendar} from "@/lib/slices/calendarSlice";
 import {ArrowLeftOutlined} from "@ant-design/icons";
+import {useState} from "react";
+import {CreateEvent} from "@/components/modals/create-event";
 
 const getListData = (value) => {
   let listData;
@@ -70,7 +73,7 @@ const getListData = (value) => {
 
 const getMonthData = (value) => {
   if (value.month() === 8) {
-    return 1394;
+    return <Badge status={"error"} text={"10 событий"} />;
   }
 };
 
@@ -79,6 +82,9 @@ export const Calendar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const project = useSelector((state) => state.project);
+  const [currentDate, setCurrentDate] = useState('');
+
+  const [open, setOpen] = useState(false);
 
   const toCalendars = () => {
     dispatch(initCalendar({}));
@@ -90,7 +96,6 @@ export const Calendar = () => {
     return num ? (
       <div className="notes-month">
         <section>{num}</section>
-        <span>Backlog number</span>
       </div>
     ) : null;
   };
@@ -98,9 +103,9 @@ export const Calendar = () => {
   const dateCellRender = (value) => {
     const listData = getListData(value);
     return (
-      <ul className="events">
+      <ul className="events" onClick={() => console.log(value)}>
         {listData.map((item) => (
-          <li key={item.content}>
+          <li key={item.content} onClick={() => console.log(item)}>
             <Badge status={item.type} text={item.content} />
           </li>
         ))}
@@ -114,12 +119,18 @@ export const Calendar = () => {
     return info.originNode;
   };
 
+  const handleSelect = (date) => {
+    setCurrentDate(date.format('DD.MM.YYYY'));
+    setOpen(true);
+  }
+
   return (
-    <main>
+    <main className={styles.main}>
       <Tooltip title={"К списку календарей"} placement={"top"}>
         <Button shape={"circle"} type={"text"} onClick={toCalendars}><ArrowLeftOutlined/></Button>
       </Tooltip>
-      <AntdCalendar cellRender={cellRender} />
+      <AntdCalendar onSelect={handleSelect} cellRender={cellRender} />
+      <CreateEvent setOpen={setOpen} open={open} date={currentDate}/>
     </main>
   );
 };

@@ -4,11 +4,13 @@ import {getNoteboards} from "@/api/noteboard.js";
 import {Loader} from "@/components/ui/loader/index.jsx";
 import {NoteboardCard} from "@/components/ui/noteboards/noteboard-card.jsx";
 import {CreateNoteboard} from "@/components/modals/create-noteboard/index.jsx";
-import {Space} from "antd";
+import {Button, Flex, Space, Tooltip} from "antd";
 import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
 import {init} from "@/lib/slices/noteboardSlice.js";
 import {useLocation, useNavigate} from "react-router-dom";
+import {ArrowLeftOutlined} from "@ant-design/icons";
+import {init as initProject} from "@/lib/slices/projectSlice";
 
 export const Noteboards = () => {
   const [noteboards, setNoteboards] = useState([]);
@@ -41,8 +43,16 @@ export const Noteboards = () => {
     navigate(`${location.pathname}${location.search}&noteboard_id=${id}`)
   }
 
+  const toProjects = () => {
+    dispatch(initProject({}));
+    navigate(`${location.pathname}`);
+  }
+
   return (
-    <section>
+    <Flex vertical align={"start"} gap={10}>
+      <Tooltip title={"К списку проектов"} placement={"top"}>
+        <Button shape={"circle"} type={"text"} onClick={toProjects}><ArrowLeftOutlined/></Button>
+      </Tooltip>
       <Space wrap className={clsx(styles.noteboards, styles.space)}>
         {
           noteboards.length ? noteboards.map(noteboard => (
@@ -61,6 +71,6 @@ export const Noteboards = () => {
         }
         <CreateNoteboard onCreate={handleCreate}/>
       </Space>
-    </section>
+    </Flex>
   );
 };
