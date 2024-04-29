@@ -16,14 +16,11 @@
   position: fixed;
   z-index: 999;
   border-radius: 0 0 10px 10px;
-  border: 1px solid #eeeeee;
   top: 0;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
 
   @include for-tablet-down() {
-    left: 0;
-    right: 0;
     padding: 20px;
   }
 

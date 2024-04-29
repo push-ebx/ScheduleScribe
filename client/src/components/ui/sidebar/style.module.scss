@@ -10,13 +10,13 @@
   gap: 40px;
   width: $sidebar-width;
   bottom: 10px;
-  left: 0px;
+  left: 0;
   top: $header-height + 20px;
   border-radius: 0 10px 10px 0;
   background: #fff;
 
   @include for-tablet-down() {
-    left: 0;
+
   }
 }
 
