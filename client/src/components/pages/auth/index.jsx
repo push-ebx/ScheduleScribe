@@ -5,6 +5,7 @@ import {login, registration} from "@/api/auth.js";
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from "@/components/hooks/useAuth.js";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import {Loader} from "@/components/ui/loader";
 
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -77,9 +78,7 @@ export const Auth = (() => {
     <>
       {
         isFetchingUser || user ?
-          <div className="loader-container">
-            <div className="loader"></div>
-          </div> :
+          <Loader /> :
           <div className={styles.container}>
             <div className={styles.formWrapper}>
               <Tabs defaultActiveKey="1">
