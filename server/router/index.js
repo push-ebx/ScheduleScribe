@@ -40,6 +40,8 @@ router.delete("/calendar/delete", authMiddleware, CalendarController.deleteCalen
 
 router.post("/event/create", authMiddleware, EventController.createEvent);
 router.get("/events/get", authMiddleware, EventController.getEvents);
+router.get("/events/important", authMiddleware, EventController.getImportantEvents);
+router.get("/events/afterDate", authMiddleware, EventController.eventsAfterDate);
 router.get("/event/get", authMiddleware, EventController.getEvent);
 router.delete("/event/delete", authMiddleware, EventController.deleteEvent);
 

@@ -15,7 +15,6 @@ const {TextArea} = Input;
 export const CreateEvent = ({onCreate, open, setOpen, date}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const user = useSelector((state) => state.user);
   const calendar = useSelector((state) => state.calendar);
   dayjs.extend(utc)
 

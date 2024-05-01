@@ -10,6 +10,16 @@ export const getEvents = async ({calendar_id}) => {
   return res.data;
 };
 
+export const getImportantEvents = async () => {
+  const res = await $api.get(`/events/important`);
+  return res.data;
+};
+
+export const getEventsAfterDate = async ({date}) => {
+  const res = await $api.get(`/events/afterDate?date=${date}`);
+  return res.data;
+};
+
 export const getEvent = async ({event_id}) => {
   const res = await $api.get(`/event/get?event_id=${event_id}`);
   return res.data;

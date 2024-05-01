@@ -20,6 +20,24 @@ class EventController {
     }
   }
 
+  async getImportantEvents(req, res, next) {
+    try {
+      const events = await eventService.getImportantEvents(req.user_id);
+      return res.send({status: 'ok', success: true, data: events});
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async eventsAfterDate(req, res, next) {
+    try {
+      const events = await eventService.eventsAfterDate(req.user_id, req.query.date);
+      return res.send({status: 'ok', success: true, data: events});
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getEvent(req, res, next) {
     try {
       const {event_id} = req.query;

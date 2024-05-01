@@ -66,7 +66,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <div className={clsx(styles.upcoming_events, styles.card)}>
-          <Typography.Title className={styles.title} level={3}>Прошедшие события</Typography.Title>
+          <Typography.Title className={styles.title} level={3}>Предстоящие события</Typography.Title>
           <div className={styles.card_content}>
             <UpcomingEvents/>
           </div>

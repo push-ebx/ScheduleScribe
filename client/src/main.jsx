@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           transparent: 'transparent'
         },
         List: {
-          itemPadding: '18px 12px'
+          itemPadding: '18px 18px'
         }
       },
     }}
