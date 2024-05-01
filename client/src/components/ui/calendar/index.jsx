@@ -10,12 +10,6 @@ import dayjs from "dayjs";
 import {getEvents} from "@/api/event";
 import {Loader} from "@/components/ui/loader";
 
-const getMonthData = (value) => {
-  if (value.month() === 8) {
-    return <Badge status={"error"} text={"10 событий"} />;
-  }
-};
-
 export const Calendar = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,18 +36,25 @@ export const Calendar = () => {
     navigate(`${location.pathname}?project_id=${project.id}`);
   }
 
+  const getCorrectDeclension = count => {
+    if (count % 10 === 1) return "событие";
+    else if (count % 10 >= 2 && count % 10 <= 4) return "события";
+    return "событий";
+  }
+
   const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
+    const count = events.filter(event => dayjs.utc(event.reminder_date).month() === value.month()).length;
+
+    return count ? (
       <div className="notes-month">
-        <section>{num}</section>
+        <Badge status={"error"} text={`${count} ${getCorrectDeclension(count)}`} />
       </div>
     ) : null;
   };
 
   const dateCellRender = (value) => {
     const day_events = events.filter(event => {
-      return  dayjs.utc(event.reminder_date).format('YYYY-MM-DD') === value.utc().format('YYYY-MM-DD');
+      return dayjs.utc(event.reminder_date).format('YYYY-MM-DD') === value.utc().format('YYYY-MM-DD');
     })
 
     return (
