@@ -62,7 +62,7 @@ export const Calendar = () => {
       <ul className="events">
         {day_events.map((item) => (
           <li key={item.content}>
-            <Badge status={importance_colors[item.importance-1]} text={item.content} />
+            <Badge status={importance_colors[item.importance-1]} text={item.title} />
           </li>
         ))}
       </ul>

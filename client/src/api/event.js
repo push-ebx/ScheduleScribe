@@ -20,6 +20,11 @@ export const getEventsAfterDate = async ({date}) => {
   return res.data;
 };
 
+export const getEventsByDate = async ({date}) => {
+  const res = await $api.get(`/events/byDate?date=${date}`);
+  return res.data;
+};
+
 export const getEvent = async ({event_id}) => {
   const res = await $api.get(`/event/get?event_id=${event_id}`);
   return res.data;

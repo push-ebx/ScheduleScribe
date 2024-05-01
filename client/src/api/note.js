@@ -10,6 +10,11 @@ export const getNotes = async ({noteboard_id}) => {
   return res.data;
 };
 
+export const getUserNotes = async () => {
+  const res = await $api.get(`/notes/getUserNotes`);
+  return res.data;
+};
+
 export const getNote = async ({note_id}) => {
   const res = await $api.get(`/note/get?note_id=${note_id}`);
   return res.data;

@@ -1,3 +1,5 @@
+const userService = require('../services/user-service');
+
 class UserController {
   async getUser(req, res, next) {
     try {
@@ -32,6 +34,15 @@ class UserController {
       image.mv(__dirname + '/public/' + image.name);
 
       res.sendStatus(200);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async statistics(req, res, next) {
+    try {
+      const statistics = await userService.statistics(req.user_id, req.query.date);
+      return res.send({status: 'ok', success: true, data: statistics});
     } catch (e) {
       next(e);
     }

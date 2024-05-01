@@ -20,6 +20,15 @@ class NoteController {
     }
   }
 
+  async getUserNotes(req, res, next) {
+    try {
+      const notes = await noteService.getUserNotes(req.user_id);
+      return res.send({status: 'ok', success: true, data: notes});
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getNote(req, res, next) {
     try {
       const {note_id} = req.query;

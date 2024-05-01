@@ -1,7 +1,9 @@
-import {Avatar, Flex, List, Tag, Typography} from "antd";
+import {Avatar, Empty, Flex, List, Tag, Typography} from "antd";
 import {useEffect, useState} from "react";
 import {getEventsAfterDate} from "@/api/event";
 import dayjs from "dayjs";
+import styles from "@/components/ui/notes-list/style.module.scss";
+import clsx from "clsx";
 
 export const UpcomingEvents = () => {
   const [events, setEvents] = useState([]);
@@ -14,7 +16,6 @@ export const UpcomingEvents = () => {
 
   const fetchEvents = async () => {
     const res = await getEventsAfterDate({date: dayjs().format("YYYY-MM-DD HH:mm:ss")});
-    console.log(res)
     setEvents(res.data);
     setIsFetching(false);
   }
@@ -25,6 +26,8 @@ export const UpcomingEvents = () => {
 
   return (
     <List
+      className={clsx(!events.length && styles.centered)}
+      locale={{emptyText: <Empty description="Предстоящие события не найдены" />}}
       itemLayout="horizontal"
       dataSource={events}
       renderItem={(item, index) => (

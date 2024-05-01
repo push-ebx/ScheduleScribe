@@ -11,7 +11,22 @@ class NoteService {
     }
   }
 
-  async getNotes(noteboard_id) {
+  async getUserNotes(user_id) {
+    try {
+      const [notes] = await mysql.query(`
+        SELECT notes.id, notes.creation_date, notes.content, notes.title, notes.importance FROM notes 
+        INNER JOIN noteboards ON noteboards.id = notes.noteboard_id
+        INNER JOIN projects ON projects.id = noteboards.project_id
+        INNER JOIN project_user ON project_user.project_id = projects.id
+        WHERE project_user.user_id = ${user_id} ORDER BY notes.importance DESC;
+      `);
+      return notes;
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  }
+
+  async getNotes(user_id) {
     try {
       const [notes] = await mysql.query(`SELECT users.username, users.url, notes.content, notes.id, notes.importance, notes.creation_date, notes.title FROM notes INNER JOIN users ON notes.user_id=users.id WHERE noteboard_id='${noteboard_id}'`);
       return notes;

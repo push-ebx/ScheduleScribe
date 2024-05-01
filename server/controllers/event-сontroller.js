@@ -38,6 +38,15 @@ class EventController {
     }
   }
 
+  async eventsByDate(req, res, next) {
+    try {
+      const events = await eventService.eventsByDate(req.user_id, req.query.date);
+      return res.send({status: 'ok', success: true, data: events});
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async getEvent(req, res, next) {
     try {
       const {event_id} = req.query;

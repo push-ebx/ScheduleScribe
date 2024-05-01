@@ -1,17 +1,45 @@
 import {Flex, Statistic} from "antd";
 import CountUp from 'react-countup';
+import {useEffect, useState} from "react";
+import {getStatistics} from "@/api/user";
+import dayjs from "dayjs";
+import {Loader} from "@/components/ui/loader";
 
 const formatter = (value) => (
   <CountUp end={value} separator=","/>
 );
 
 export const Info = () => {
+  const [statistics, setStatistics] = useState();
+  const deadline = Date.now() + 1000 * 60 * 60 * statistics?.hours_left +
+    1000 * 60 * statistics?.minutes_left +
+    1000 * statistics?.seconds_left;
+
+  const fetchStatistics = async () => {
+    const res = await getStatistics({date: dayjs().format("YYYY-MM-DD HH:mm:ss")});
+    setStatistics(res.data);
+  }
+
+  useEffect(() => {
+    fetchStatistics()
+  }, []);
+
   return (
     <Flex style={{padding: 30, height: '100%'}} vertical gap={15} justify={"center"}>
-      <Statistic title="Активных событий" value={23} formatter={formatter}/>
-      <Statistic title="Завершенных событий" value={53} formatter={formatter}/>
-      <Statistic title="Времени до следующего события" value={52} formatter={formatter}/>
-      <Statistic title="Важных событий" value={13} formatter={formatter}/>
+      {
+        statistics ?
+        <>
+          <Statistic title="Активных событий" value={statistics.active_events} formatter={formatter}/>
+          <Statistic title="Завершенных событий" value={statistics.completed_events} formatter={formatter}/>
+            <Statistic.Countdown
+              value={deadline}
+              title="Времени до следующего события"
+              // value={statistics.hours_left}
+            />
+          <Statistic title="Важных событий" value={statistics.important_events} formatter={formatter}/>
+        </> :
+        <Loader />
+      }
     </Flex>
   );
 };

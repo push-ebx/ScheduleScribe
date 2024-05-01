@@ -15,6 +15,7 @@ router.post("/auth/registration", AuthController.registration);
 
 router.get("/user/get", authMiddleware, UserController.getUser);
 router.post("/user/upload", UserController.uploadImage);
+router.get("/user/statistics", authMiddleware, UserController.statistics);
 
 router.post("/project/create", authMiddleware, ProjectController.createProject);
 router.post("/project/add", authMiddleware, ProjectController.addProject);
@@ -29,6 +30,7 @@ router.delete("/noteboard/delete", authMiddleware, NoteboardController.deleteNot
 
 router.post("/note/create", authMiddleware, NoteController.createNote);
 router.get("/notes/get", authMiddleware, NoteController.getNotes);
+router.get("/notes/getUserNotes", authMiddleware, NoteController.getUserNotes);
 router.get("/note/get", authMiddleware, NoteController.getNote);
 router.delete("/note/delete", authMiddleware, NoteController.deleteNote);
 router.post("/note/changeImportance", authMiddleware, NoteController.changeImportance);
@@ -42,6 +44,7 @@ router.post("/event/create", authMiddleware, EventController.createEvent);
 router.get("/events/get", authMiddleware, EventController.getEvents);
 router.get("/events/important", authMiddleware, EventController.getImportantEvents);
 router.get("/events/afterDate", authMiddleware, EventController.eventsAfterDate);
+router.get("/events/byDate", authMiddleware, EventController.eventsByDate);
 router.get("/event/get", authMiddleware, EventController.getEvent);
 router.delete("/event/delete", authMiddleware, EventController.deleteEvent);
 
