@@ -1,7 +1,7 @@
 import {$api} from "./config";
 
-export const createEvent = async ({calendar_id, reminder_date, content, title}) => {
-  const res = await $api.post(`/event/create`, {calendar_id, reminder_date, content, title});
+export const createEvent = async ({calendar_id, reminder_date, content, title, importance}) => {
+  const res = await $api.post(`/event/create`, {calendar_id, reminder_date, content, title, importance});
   return res.data;
 };
 

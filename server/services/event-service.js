@@ -1,10 +1,10 @@
 const {v4: uuidv4} = require('uuid');
 
 class EventService {
-  async createEvent(calendar_id, reminder_date, content, title) {
+  async createEvent(calendar_id, reminder_date, content, title, importance) {
     try {
       const event_id = uuidv4();
-      await mysql.query(`INSERT INTO events (id, calendar_id, reminder_date, content, title) VALUES ('${event_id}', '${calendar_id}', '${reminder_date}', '${content}', '${title}')`);
+      await mysql.query(`INSERT INTO events (id, calendar_id, reminder_date, content, title, importance) VALUES ('${event_id}', '${calendar_id}', '${reminder_date}', '${content}', '${title}', '${importance}')`);
       return event_id;
     } catch (e) {
       throw new Error(e.message);

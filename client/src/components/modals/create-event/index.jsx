@@ -27,7 +27,7 @@ export const CreateEvent = ({onCreate, open, setOpen, date}) => {
 
       const reminder_date = `${date.format("YYYY-MM-DD")} ${values.time.format(format)}`
 
-      const res = await createEvent({
+      await createEvent({
         calendar_id: calendar.id,
         importance: values.importance ?? "1",
         content: values.content,
@@ -85,7 +85,7 @@ export const CreateEvent = ({onCreate, open, setOpen, date}) => {
               label="Время:"
               rules={[{required: true, message: 'Пожалуйста, выберите время события'}]}
             >
-              <TimePicker defaultValue={dayjs(dayjs(), format)} format={format} />
+              <TimePicker format={format} />
             </Form.Item>
             <Form.Item
               name="importance"

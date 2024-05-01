@@ -3,8 +3,8 @@ const eventService = require('../services/event-service');
 class EventController {
   async createEvent(req, res, next) {
     try {
-      const {calendar_id, reminder_date, content, title} = req.body;
-      const id = await eventService.createEvent(calendar_id, reminder_date, content, title);
+      const {calendar_id, reminder_date, content, title, importance} = req.body;
+      const id = await eventService.createEvent(calendar_id, reminder_date, content, title, importance);
       return res.send({status: 'ok', success: true, message: 'Событие успешно создано!', data: {id}});
     } catch (e) {
       next(e);

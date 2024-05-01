@@ -20,6 +20,7 @@ export const Calendar = () => {
   const calendar = useSelector((state) => state.calendar);
   const [events, setEvents] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
+  const importance_colors = ["success", "warning", "error"];
 
   const fetchEvents = async () => {
     const res = await getEvents({calendar_id: calendar.id});
@@ -61,7 +62,7 @@ export const Calendar = () => {
       <ul className="events">
         {day_events.map((item) => (
           <li key={item.content}>
-            <Badge status={"success"} text={item.content} />
+            <Badge status={importance_colors[item.importance-1]} text={item.content} />
           </li>
         ))}
       </ul>
