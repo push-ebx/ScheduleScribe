@@ -4,7 +4,7 @@ class EventService {
   async createEvent(calendar_id, reminder_date, content, title) {
     try {
       const event_id = uuidv4();
-      await mysql.query(`INSERT INTO events (id, calendar_id, reminder_date, content, title) VALUES ('${event_id}', '${calendar_id}', CAST('${reminder_date}' AS DateTime), '${content}', '${title}')`);
+      await mysql.query(`INSERT INTO events (id, calendar_id, reminder_date, content, title) VALUES ('${event_id}', '${calendar_id}', '${reminder_date}', '${content}', '${title}')`);
       return event_id;
     } catch (e) {
       throw new Error(e.message);

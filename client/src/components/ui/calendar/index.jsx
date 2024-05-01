@@ -4,72 +4,11 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {init as initCalendar} from "@/lib/slices/calendarSlice";
 import {ArrowLeftOutlined} from "@ant-design/icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CreateEvent} from "@/components/modals/create-event";
-
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-      ];
-      break;
-    case 10:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event.',
-        },
-      ];
-      break;
-    case 15:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event',
-        },
-        {
-          type: 'success',
-          content: 'This is very long usual event......',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 1.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 2.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 3.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 4.',
-        },
-      ];
-      break;
-    default:
-  }
-  return listData || [];
-};
+import dayjs from "dayjs";
+import {getEvents} from "@/api/event";
+import {Loader} from "@/components/ui/loader";
 
 const getMonthData = (value) => {
   if (value.month() === 8) {
@@ -82,9 +21,21 @@ export const Calendar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const project = useSelector((state) => state.project);
-  const [currentDate, setCurrentDate] = useState('');
-
+  const [currentDate, setCurrentDate] = useState(dayjs());
   const [open, setOpen] = useState(false);
+  const calendar = useSelector((state) => state.calendar);
+  const [events, setEvents] = useState([]);
+  const [isFetching, setIsFetching] = useState(true);
+
+  const fetchEvents = async () => {
+    const res = await getEvents({calendar_id: calendar.id});
+    setEvents(res.data);
+    setIsFetching(false);
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, []);
 
   const toCalendars = () => {
     dispatch(initCalendar({}));
@@ -101,12 +52,15 @@ export const Calendar = () => {
   };
 
   const dateCellRender = (value) => {
-    const listData = getListData(value);
+    const day_events = events.filter(event => {
+      return  dayjs.utc(event.reminder_date).format('YYYY-MM-DD') === value.utc().format('YYYY-MM-DD');
+    })
+
     return (
-      <ul className="events" onClick={() => console.log(value)}>
-        {listData.map((item) => (
-          <li key={item.content} onClick={() => console.log(item)}>
-            <Badge status={item.type} text={item.content} />
+      <ul className="events">
+        {day_events.map((item) => (
+          <li key={item.content}>
+            <Badge status={"success"} text={item.content} />
           </li>
         ))}
       </ul>
@@ -120,8 +74,16 @@ export const Calendar = () => {
   };
 
   const handleSelect = (date) => {
-    setCurrentDate(date.format('DD.MM.YYYY'));
+    setCurrentDate(date);
     setOpen(true);
+  }
+
+  const handlerCreate = ({calendar_id,
+                           importance,
+                           content,
+                           reminder_date,
+                           title}) => {
+    setEvents(prev => [...prev, {calendar_id, importance, content, reminder_date, title}]);
   }
 
   return (
@@ -129,8 +91,10 @@ export const Calendar = () => {
       <Tooltip title={"К списку календарей"} placement={"top"}>
         <Button shape={"circle"} type={"text"} onClick={toCalendars}><ArrowLeftOutlined/></Button>
       </Tooltip>
-      <AntdCalendar onSelect={handleSelect} cellRender={cellRender} />
-      <CreateEvent setOpen={setOpen} open={open} date={currentDate}/>
+      {
+        isFetching ? <Loader/> : <AntdCalendar onSelect={handleSelect} cellRender={cellRender} />
+      }
+      <CreateEvent onCreate={handlerCreate} setOpen={setOpen} open={open} date={currentDate}/>
     </main>
   );
 };

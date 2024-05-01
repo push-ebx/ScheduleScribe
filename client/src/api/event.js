@@ -5,8 +5,8 @@ export const createEvent = async ({calendar_id, reminder_date, content, title}) 
   return res.data;
 };
 
-export const getEvents = async () => {
-  const res = await $api.get(`/events/get`);
+export const getEvents = async ({calendar_id}) => {
+  const res = await $api.get(`/events/get?calendar_id=${calendar_id}`);
   return res.data;
 };
 

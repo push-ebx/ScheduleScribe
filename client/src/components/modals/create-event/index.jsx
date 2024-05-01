@@ -6,6 +6,8 @@ import {useSelector} from "react-redux";
 import { Segmented } from 'antd';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import {createEvent} from "@/api/event";
 
 const format = 'HH:mm';
 const {TextArea} = Input;
@@ -14,28 +16,32 @@ export const CreateEvent = ({onCreate, open, setOpen, date}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const user = useSelector((state) => state.user);
+  const calendar = useSelector((state) => state.calendar);
+  dayjs.extend(utc)
 
   const handleCreate = async () => {
     try {
       setConfirmLoading(true);
 
       const values = await form.validateFields();
-      const res = await createNote({
-        content: values.content,
+
+      const reminder_date = `${date.format("YYYY-MM-DD")} ${values.time.format(format)}`
+
+      const res = await createEvent({
+        calendar_id: calendar.id,
         importance: values.importance ?? "1",
-        noteboard_id: noteboard.id,
+        content: values.content,
+        reminder_date: reminder_date,
         title: values.title
       });
 
       setTimeout(() => {
         onCreate({
-          id: res.data.id,
-          content: values.content,
+          calendar_id: calendar.id,
           importance: values.importance ?? "1",
-          noteboard_id: noteboard.id,
-          title: values.title,
-          username: user.username,
-          url: user.url
+          content: values.content,
+          reminder_date: reminder_date,
+          title: values.title
         });
         setOpen(false);
         form.resetFields();
@@ -58,7 +64,7 @@ export const CreateEvent = ({onCreate, open, setOpen, date}) => {
         confirmLoading={confirmLoading}
       >
         <Flex vertical gap={10}>
-          <Typography.Text type={"secondary"}>Выбранная дата: {date}</Typography.Text>
+          <Typography.Text type={"secondary"}>Выбранная дата: {date.format('DD.MM.YYYY')}</Typography.Text>
           <Form form={form} layout="vertical">
             <Form.Item
               name="title"
@@ -79,7 +85,7 @@ export const CreateEvent = ({onCreate, open, setOpen, date}) => {
               label="Время:"
               rules={[{required: true, message: 'Пожалуйста, выберите время события'}]}
             >
-              <TimePicker defaultValue={dayjs('12:08', format)} format={format} />
+              <TimePicker defaultValue={dayjs(dayjs(), format)} format={format} />
             </Form.Item>
             <Form.Item
               name="importance"
