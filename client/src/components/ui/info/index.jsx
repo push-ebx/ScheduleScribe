@@ -24,6 +24,12 @@ export const Info = () => {
     fetchStatistics()
   }, []);
 
+  const handleChange = (value) => {
+    if (value <= 0) {
+      setTimeout(() => fetchStatistics(), 2000);
+    }
+  }
+
   return (
     <Flex style={{padding: 30, height: '100%'}} vertical gap={15} justify={"center"}>
       {
@@ -32,9 +38,9 @@ export const Info = () => {
           <Statistic title="Активных событий" value={statistics.active_events} formatter={formatter}/>
           <Statistic title="Завершенных событий" value={statistics.completed_events} formatter={formatter}/>
             <Statistic.Countdown
+              onChange={handleChange}
               value={deadline}
               title="Времени до следующего события"
-              // value={statistics.hours_left}
             />
           <Statistic title="Важных событий" value={statistics.important_events} formatter={formatter}/>
         </> :

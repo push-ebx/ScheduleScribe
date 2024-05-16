@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import {createEvent} from "@/api/event";
 
-const format = 'HH:mm';
+const format = 'HH:mm:ss';
 const {TextArea} = Input;
 
 export const CreateEvent = ({onCreate, open, setOpen, date}) => {

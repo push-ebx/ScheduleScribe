@@ -4,30 +4,31 @@ const express = require("express");
 const cors = require("cors");
 const localServerApp = express();
 const PORT = 5000;
-const startLocalServer = (done) => {
-  localServerApp.use(express.json({ limit: "100mb" }));
-  localServerApp.use(cors());
-  localServerApp.use(express.static('./build/'));
-  localServerApp.listen(PORT, async () => {
-    console.log("Server Started on PORT ", PORT);
-    done();
-  });
-};
+// const startLocalServer = (done) => {
+//   localServerApp.use(express.json({ limit: "100mb" }));
+//   localServerApp.use(cors());
+//   localServerApp.use(express.static('./dist/assets'));
+//   localServerApp.listen(PORT, async () => {
+//     console.log("Server Started on PORT ", PORT);
+//     done();
+//   });
+// };
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
+    // webPreferences: {
+    //   preload: path.join(__dirname, "preload.js"),
+    // },
   });
 
   // and load the index.html of the app.
   //   mainWindow.loadFile('index.html')
-  mainWindow.loadURL("http://localhost:5173/auth");
-
+  // mainWindow.loadURL("http://localhost:5173/auth");
+  mainWindow.loadFile("./dist/index.html");
+  mainWindow.webContents.openDevTools()
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -36,13 +37,13 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  startLocalServer(createWindow);
-
-  app.on("activate", function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
+  // startLocalServer(createWindow);
+  createWindow()
+  // app.on("activate", function () {
+  //   // On macOS it's common to re-create a window in the app when the
+  //   // dock icon is clicked and there are no other windows open.
+  //   if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  // });
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
