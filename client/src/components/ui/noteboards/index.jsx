@@ -53,7 +53,7 @@ export const Noteboards = () => {
       <Tooltip title={"К списку проектов"} placement={"top"}>
         <Button shape={"circle"} type={"text"} onClick={toProjects}><ArrowLeftOutlined/></Button>
       </Tooltip>
-      <Space wrap className={clsx(styles.noteboards, styles.space)}>
+      <Flex wrap className={clsx(styles.noteboards, styles.space)}>
         {
           noteboards.length ? noteboards.map(noteboard => (
               <NoteboardCard
@@ -69,8 +69,10 @@ export const Noteboards = () => {
               <Loader/> :
               "Доски не найдены"
         }
-        <CreateNoteboard onCreate={handleCreate}/>
-      </Space>
+        <Flex style={{height: '100%', width: 280, border: '2px var(--accent-color) dashed', borderRadius: '10px'}} align={"center"} justify={"center"}>
+          <CreateNoteboard onCreate={handleCreate}/>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };

@@ -1,4 +1,4 @@
-import {FloatButton, Form, Input, Modal, Tooltip} from "antd";
+import {Button, FloatButton, Form, Input, Modal, Tooltip} from "antd";
 import {useState} from "react";
 import {createNote} from "@/api/note.js";
 import {useSelector} from "react-redux";
@@ -48,7 +48,7 @@ export const CreateCalendar = ({onCreate}) => {
   return (
     <>
       <Tooltip title={"Создать календарь"} placement={"top"}>
-        <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
+        <Button shape={"circle"} onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
       </Tooltip>
       <Modal
         title="Создание календаря"

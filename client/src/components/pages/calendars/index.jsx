@@ -91,7 +91,9 @@ export const Calendars = () => {
                       onSelect={() => handleSelect(item)}
                     />
                   ))}
-                  <CreateCalendar onCreate={handleCreate}/>
+                  <Flex style={{height: '100%', border: '2px var(--accent-color) dashed', borderRadius: '10px'}} align={"center"} justify={"center"}>
+                    <CreateCalendar onCreate={handleCreate}/>
+                  </Flex>
                 </Masonry>
               </ResponsiveMasonry>
             </Flex> :

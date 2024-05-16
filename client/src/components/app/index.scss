@@ -12,6 +12,10 @@ body {
   background: #eee;
 }
 
+:root {
+  --accent-color: #68ff36;
+}
+
 .loader-container {
   position: fixed;
   left: 50%;

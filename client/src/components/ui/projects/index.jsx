@@ -4,7 +4,7 @@ import {getProjects} from "@/api/project.js";
 import {Loader} from "@/components/ui/loader/index.jsx";
 import {ProjectCard} from "@/components/ui/projects/project-card.jsx";
 import {CreateProject} from "@/components/modals/create-project/index.jsx";
-import {Space} from "antd";
+import {Flex, Space} from "antd";
 import clsx from "clsx";
 import {useDispatch} from "react-redux";
 import {init} from "@/lib/slices/projectSlice.js";
@@ -44,7 +44,7 @@ export const Projects = () => {
   return (
     <section className={styles.main}>
       <h1>Проекты <ProjectOutlined /></h1>
-      <Space wrap className={clsx(styles.projects, styles.space)}>
+      <Flex wrap className={clsx(styles.projects, styles.space)}>
         {
           projects.length ? projects.map(project => (
               <ProjectCard
@@ -60,8 +60,10 @@ export const Projects = () => {
               <Loader/> :
               "Проекты не найдены"
         }
-        <CreateProject onCreate={handleCreate}/>
-      </Space>
+        <Flex style={{height: '100%', width: 280, border: '2px var(--accent-color) dashed', borderRadius: '10px'}} align={"center"} justify={"center"}>
+          <CreateProject onCreate={handleCreate}/>
+        </Flex>
+      </Flex>
     </section>
   );
 };

@@ -37,7 +37,7 @@ export const CreateNoteboard = ({onCreate}) => {
   return (
     <>
       <Tooltip title={"Создать доску заметок"} placement={"top"}>
-        <FloatButton onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
+        <Button shape={"circle"} onClick={() => setOpen(true)} icon={<PlusOutlined />}/>
       </Tooltip>
       <Modal
         title="Создание доски заметок"
