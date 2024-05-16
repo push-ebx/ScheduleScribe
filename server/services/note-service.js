@@ -26,7 +26,7 @@ class NoteService {
     }
   }
 
-  async getNotes(user_id) {
+  async getNotes(noteboard_id) {
     try {
       const [notes] = await mysql.query(`SELECT users.username, users.url, notes.content, notes.id, notes.importance, notes.creation_date, notes.title FROM notes INNER JOIN users ON notes.user_id=users.id WHERE noteboard_id='${noteboard_id}'`);
       return notes;
