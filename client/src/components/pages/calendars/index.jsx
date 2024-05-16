@@ -34,7 +34,7 @@ export const Calendars = () => {
 
   const toProjects = () => {
     dispatch(initProject({}));
-    navigate(`${location.pathname}`);
+    // navigate(`${location.pathname}`);
   }
 
   const handleCreate = ({id, title, project_id, description, username}) => {
@@ -47,8 +47,9 @@ export const Calendars = () => {
   }
 
   const handleSelect = (item) => {
+    console.log(location)
     dispatch(initCalendar({id: item.id, title: item.title, description: item.description}));
-    navigate(`${location.pathname}${location.search}&calendar_id=${item.id}`)
+    // navigate(`${location.pathname}${location.search}&calendar_id=${item.id}`)
   }
 
   return (

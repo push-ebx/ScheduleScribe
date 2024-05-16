@@ -34,7 +34,7 @@ export const Calendar = () => {
 
   const toCalendars = () => {
     dispatch(initCalendar({}));
-    navigate(`${location.pathname}?project_id=${project.id}`);
+    // navigate(`${location.pathname}?project_id=${project.id}`);
   }
 
   const getCorrectDeclension = count => {

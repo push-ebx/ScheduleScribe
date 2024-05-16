@@ -32,7 +32,7 @@ export const Notes = () => {
 
   const toNoteboards = () => {
     dispatch(initNoteboard({}));
-    navigate(`${location.pathname}?project_id=${project.id}`);
+    // navigate(`${location.pathname}?project_id=${project.id}`);
   }
 
   const handleCreate = ({id, content, importance, noteboard_id, title, username, url}) => {

@@ -40,12 +40,12 @@ export const Noteboards = () => {
 
   const handleSelect = ({id, title, description}) => {
     dispatch(init({id, title, description}));
-    navigate(`${location.pathname}${location.search}&noteboard_id=${id}`)
+    // navigate(`${location.pathname}${location.search}&noteboard_id=${id}`)
   }
 
   const toProjects = () => {
     dispatch(initProject({}));
-    navigate(`${location.pathname}`);
+    // navigate(`${location.pathname}`);
   }
 
   return (

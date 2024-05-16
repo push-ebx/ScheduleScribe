@@ -29,7 +29,7 @@ export const Header = () => {
   return (
     <header className={clsx(styles.header)}>
       <div className={styles.logo}>
-        Schedule<span style={{color: "#ff5555"}}>S</span>cribe
+        Schedule<span style={{color: "#68ff36"}}>S</span>cribe
       </div>
       <div className={styles.user}>
         <Dropdown menu={{items}}>

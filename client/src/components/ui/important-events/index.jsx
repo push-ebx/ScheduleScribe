@@ -40,7 +40,7 @@ export const ImportantEvents = () => {
           />
           <Flex vertical gap={5} align={"end"}>
             <Tag color={importances[item.importance - 1].color}>{importances[item.importance - 1].title}</Tag>
-            <Typography.Text type={"secondary"}>{dayjs(item.reminder_date).format("DD.MM.YYYY HH:MM")}</Typography.Text>
+            <Typography.Text type={"secondary"}>{dayjs(item.reminder_date).format("DD.MM.YYYY HH:mm")}</Typography.Text>
           </Flex>
         </List.Item>
       )}

@@ -1,7 +1,6 @@
 import styles from "./style.module.scss";
 import {Form, Input, Modal, Flex, Typography} from "antd";
 import {useState} from "react";
-import {createNote} from "@/api/note.js";
 import {useSelector} from "react-redux";
 import { Segmented } from 'antd';
 import { TimePicker } from 'antd';
